@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+body {
+  --type-first: Helvetica, Arial, sans-serif;
+  font-family: var(--type-first);
+}
+
+.displayNone {
+  display: none;
+}
