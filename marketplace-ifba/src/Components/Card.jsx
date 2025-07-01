@@ -35,6 +35,7 @@ const Icon = styled.div`
 const Title = styled.h1`
     font-size: 1.3rem;
     margin: 40px 0px 0px 20px;
+    font-family: "Inter", sans-serif;
 `
 
 const Infos = styled.p`

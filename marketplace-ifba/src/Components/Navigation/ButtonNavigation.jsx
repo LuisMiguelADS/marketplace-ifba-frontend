@@ -30,6 +30,7 @@ const ButtonNav = styled.button`
 `
 
 const TitleButton = styled.h1`
+    font-family: "Inter", sans-serif;
     color: white;
     margin-left: 20px;
 `

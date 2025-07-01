@@ -28,9 +28,11 @@ const ContainerInfos = styled.div`
 const NameUserLogged = styled.p`
    font-weight: bold;
    font-size: 1.1rem;
+   font-family: "Inter", sans-serif;
 `
 
 const OrgOrEnterprise = styled.p`
+
     
 `
 

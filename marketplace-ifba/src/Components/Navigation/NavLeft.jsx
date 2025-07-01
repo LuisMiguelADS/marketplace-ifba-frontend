@@ -13,6 +13,7 @@ const NavigationLeft = styled.nav`
     background-color: #01420c;
     position: fixed;
     z-index: 10;
+    border-radius: 0px 10px 10px 0px;
 `
 
 const TopNavigation = styled.div`
@@ -21,7 +22,7 @@ const TopNavigation = styled.div`
     max-height: 150px;
     min-width: 300px;
     justify-content: space-between;
-    padding: 10px;
+    padding: 20px;
 `
 
 const Logo = styled.img`
