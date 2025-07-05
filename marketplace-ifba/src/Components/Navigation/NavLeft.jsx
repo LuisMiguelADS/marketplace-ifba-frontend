@@ -13,7 +13,6 @@ const NavigationLeft = styled.nav`
     background-color: #01420c;
     position: fixed;
     z-index: 10;
-    border-radius: 0px 10px 10px 0px;
 `
 
 const TopNavigation = styled.div`
@@ -22,7 +21,7 @@ const TopNavigation = styled.div`
     max-height: 150px;
     min-width: 300px;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
 `
 
 const Logo = styled.img`
@@ -46,9 +45,9 @@ const NavLeft = () => {
         </Link>
         <ButtonNavigation Icon='pi pi-chart-pie' Caminho="/overview">Visão Geral</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-file-edit' Caminho="/demands">Demandas</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-file-import'>Propostas</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-users'>Grupos Pesquisa</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-comments'>Conversas</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-file-import' Caminho="/proposals">Propostas</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-users' Caminho="/research-group">Grupos Pesquisa</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-comments' Caminho="/conversations">Conversas</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-user'>Perfil</ButtonNavigation>
     </NavigationLeft>
 }

@@ -5,40 +5,25 @@ import NavLeft from './Components/Navigation/NavLeft';
 import Header from './Components/Header/Header';
 import Overview from './Components/Overview';
 import Demands from './Components/Demands';
-import Login from './Components/pages/login/Login';
-import Register from './Components/pages/register/Register';
+import Proposals_ from './Components/Proposals_'; Conversations
+import GroupResearch from './Components/GroupResearch';
+import Conversations from './Components/Conversations';
 
 function App() {
-  return <main>
+  return <div className='grid-container'>
     <BrowserRouter>
+      <NavLeft />
+      <Header />
       <Routes>
-        <Route path="/" element={
-          <>
-          <NavLeft />
-          <Header />
-          <Demands />
-        </>
-        } />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/overview" element={
-          <>
-          <NavLeft />
-          <Header />
-          <Overview />
-        </>
-        } />
-        <Route path="/demands" element={
-          <>
-          <NavLeft />
-          <Header />
-          <Demands />
-        </>
-        } />
+        <Route path="/overview" element={<Overview />} />
+        <Route path="/demands" element={<Demands />} />
+        <Route path="/proposals" element={<Proposals_ />} />
+        <Route path="/research-group" element={<GroupResearch />} />
+        <Route path="/conversations" element={<Conversations />} />
       </Routes>
     </BrowserRouter>
 
-  </main>
+  </div>
 }
 
 export default App;

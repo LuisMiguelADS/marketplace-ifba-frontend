@@ -3,11 +3,23 @@
   margin: 0px;
 }
 
+:root {
+  --font-family: Arial, Arial, sans-serif;
+  --standard-border: 5px;
+}
+
 body {
-  --type-first: Helvetica, Arial, sans-serif;
-  font-family: var(--type-first);
+  font-family: var(--font-family);
 }
 
 .displayNone {
   display: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 100px 1fr;
+  height: 100vh;
+  overflow: hidden;
 }

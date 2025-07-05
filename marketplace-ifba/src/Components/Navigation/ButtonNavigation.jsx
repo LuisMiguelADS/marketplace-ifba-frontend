@@ -15,7 +15,7 @@ const ButtonNav = styled.button`
     align-items: center;
     width: 270px;
     height: 70px;
-    border-radius: 15px;
+    border-radius: var(--standard-border);
     background-color: #025911;
     border: none;
     margin-top: 10px;
@@ -30,7 +30,6 @@ const ButtonNav = styled.button`
 `
 
 const TitleButton = styled.h1`
-    font-family: "Inter", sans-serif;
     color: white;
     margin-left: 20px;
 `

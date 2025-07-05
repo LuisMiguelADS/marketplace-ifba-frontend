@@ -5,7 +5,7 @@ import InfoPerfil from './InfoPerfil';
 
 const StyledHeader = styled.header`
     background-color: #018D1A;
-    height: 72px;
+    height: 100px;
     width: 100%;
     position: fixed;
     z-index: 9;
