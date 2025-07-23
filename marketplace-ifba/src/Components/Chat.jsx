@@ -127,9 +127,9 @@ const Chat = (props) => {
         <h1 style={{ paddingLeft: '30px' }}>{props.Title}</h1>
         <Messages>
             {props.Messages && props.Messages.map((msg, index) => {
-                return <div>
+                return <div key={index}>
                     {(msg.user.name === 'Integrante 1') ?
-                        <Message key={index}>
+                        <Message>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                                 <ContainerImage>
                                     {(msg.user.img_perfil) ? (<Image src={msg.user.img_perfil} alt={msg.user.name} />) : (<NoImage className='pi pi-user' />)}
@@ -139,7 +139,7 @@ const Chat = (props) => {
                             <ContentMessage>{msg.message}</ContentMessage>
                             <p style={{ marginLeft: '70px' }}>{msg.dateTime}</p>
                         </Message> :
-                        <Message key={index} style={{ alignItems: 'end' }}>
+                        <Message style={{ alignItems: 'end' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                                 <h3>Você</h3>
                                 <ContainerImage>

@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
+import { UserContext } from '../UserContext';
 
 const Container = styled.div`
     display: flex;
     grid-template-columns: 1fr 1fr;
-    width: 180px;
+    width: 220px;
     max-height: 60px;
     align-self: flex-end;
     align-items: center;
@@ -34,13 +35,26 @@ const OrgOrEnterprise = styled.p`
     
 `
 
+const IconLogOut = styled.span`
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+
+    &:hover {
+        scale: 1.2;
+    }
+`
+
 const InfoPerfil = (props) => {
+    const { userLogout } = React.useContext(UserContext);
+
     return <Container>
         <FotoPerfil src={props.FotoPerfil} />
         <ContainerInfos>
             <NameUserLogged>{props.NameUserLogged}</NameUserLogged>
             <OrgOrEnterprise>{props.OrgOrEnterprise}</OrgOrEnterprise>
         </ContainerInfos>
+        <IconLogOut className='pi pi-sign-out' onClick={userLogout} />
     </Container>
 }
 

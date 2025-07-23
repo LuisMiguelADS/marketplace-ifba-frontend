@@ -64,8 +64,7 @@ const Modal = (props) => {
             <ContainerButtons>
                 {props.ButtonEdit && <Button Edited>Editar</Button>}
                 {props.ButtonRecused && <Button Recused>Excluir</Button>}
-                {props.ButtonConfirm && <Button>
-                    Aceitar</Button>}
+                {props.ButtonConfirm && <Button>Aceitar</Button>}
             </ContainerButtons>)}
     </StyledModal>
 };

@@ -1,10 +1,10 @@
 import React from 'react';
-import Card from './Card';
 import styled from 'styled-components';
-import NewDemandForm from './NewDemandForm';
-import ContainerMainContent from './ContainerMainContent';
-import ListInformations from './ListInformations';
-import Modal from './Modal';
+import Card from '../../Components/Card';
+import NewDemandForm from '../../Components/NewDemandForm';
+import ContainerMainContent from '../../Components/ContainerMainContent';
+import ListInformations from '../../Components/ListInformations';
+import Modal from '../../Components/Modal';
 
 const ContainerCards = styled.div`
     width: 100%;
@@ -65,7 +65,7 @@ const requiredResources = {
     }]
 };
 
-const Demands = () => {
+const DemandsProvider = () => {
     const [modal, setModal] = React.useState(false);
 
     function handleClickModal(event) {
@@ -83,9 +83,15 @@ const Demands = () => {
         <h1>Nova Demanda</h1>
         <NewDemandForm />
         <Modal SetModal={setModal} View={modal} ButtonEdit ButtonRecused>
-            <ListInformations Title="Web Soluções" Informations={[informationsGeneral, aboutProposal, restrictions, requiredResources]} buttonClosedModal="yes" onClick={handleClickModal} editStyle={{ maxHeight: '700px' }} Modal />
+            <ListInformations
+                Title="Web Soluções"
+                Informations={[informationsGeneral, aboutProposal, restrictions, requiredResources]}
+                buttonClosedModal="yes"
+                onClick={handleClickModal}
+                editStyle={{ maxHeight: '700px' }}
+                modal />
         </Modal>
     </ContainerMainContent>
 }
 
-export default Demands;
+export default DemandsProvider;

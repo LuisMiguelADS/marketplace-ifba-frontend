@@ -67,7 +67,7 @@ const Input = ({ label, type, name, value, onChange, error, onBlur, placeholder,
           onChange={onChange}
           value={value}
           onBlur={onBlur}
-          row="5"
+          row='5'
           placeholder={placeholder}
           style={editStyle}
         />);

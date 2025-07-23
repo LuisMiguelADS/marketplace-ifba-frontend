@@ -15,6 +15,7 @@ const StyledHeader = styled.header`
 `
 
 const Header = () => {
+
     return (
         <StyledHeader>
             <InfoPerfil NameUserLogged="Integrante 1" OrgOrEnterprise="Empresa FIC" FotoPerfil={fotoPerfil}></InfoPerfil>

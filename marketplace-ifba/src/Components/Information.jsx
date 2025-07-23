@@ -49,7 +49,7 @@ const Information = ({ Title, Informations, Tags }) => {
         {Informations && Informations.map((info, index) => (
             <div key={index}>
                 <h3>{info.subTitle}</h3>
-                {(info.description) && <p style={{ textAlign: 'justify' }}>{info.description}</p>}
+                {(info.description) && <p style={{ textAlign: 'justify', marginTop: '5px' }}>{info.description}</p>}
                 {(info.members) && (
                     <ContainerMembers>
                         {info.members.map((member) => (

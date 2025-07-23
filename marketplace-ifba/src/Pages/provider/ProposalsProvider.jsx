@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import Select from './Forms/Select';
-import useForm from '../Hooks/useForm';
-import Button from './Forms/Button';
-import Input from './Forms/Input';
-import Card from './Card';
-import ListInformations from './ListInformations';
-import ContainerMainContent from './ContainerMainContent';
-import FormFilter from './FormFilter';
-import Modal from './Modal';
+import Select from '../../Components/Forms/Select';
+import useForm from '../../Hooks/useForm';
+import Input from '../../Components/Forms/Input';
+import Card from '../../Components/Card';
+import ListInformations from '../../Components/ListInformations';
+import ContainerMainContent from '../../Components/ContainerMainContent';
+import FormFilter from '../../Components/FormFilter';
+import Modal from '../../Components/Modal';
 
 const ContainerCards = styled.div`
     width: 100%;
@@ -25,7 +24,7 @@ const ContainerButtons = styled.div`
     gap: 30px;
 `
 
-const Proposals_ = () => {
+const ProposalsProvider = () => {
     const searchDemand = useForm();
     const areaSelect = useForm();
     const budgetSelect = useForm();
@@ -111,9 +110,9 @@ const Proposals_ = () => {
             <Card IconContainer="pi pi-file-import" Title="Landing Page" Infos={['Grupo Web Soluções', 'Instituição: IFBA', 'Prazo: 10/10/2025', 'Orçamento: R$ 3.000,00']} Tags={['IA', 'Desenvolvimento Web', 'Desenvolvimento Web']} ButtonViewDetails onClickButtonViewDetails={handleClickModal} />
         </ContainerCards>
         <Modal SetModal={setModal} View={modal} ButtonRecused ButtonConfirm>
-            <ListInformations Title="Web Soluções" Informations={[informationsGeneral, aboutProposal, restrictions, requiredResources]} editStyle={{ maxHeight: '700px' }} Modal />
+            <ListInformations Title="Web Soluções" Informations={[informationsGeneral, aboutProposal, restrictions, requiredResources]} editStyle={{ maxHeight: '700px' }} modal />
         </Modal>
     </ContainerMainContent>
 }
 
-export default Proposals_;
+export default ProposalsProvider;

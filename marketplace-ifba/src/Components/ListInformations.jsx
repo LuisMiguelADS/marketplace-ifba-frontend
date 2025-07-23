@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Information from './Information';
-import Button from './Forms/Button';
-import ButtonClosedModel from './ButtonClosedModel';
 
 const Container = styled.div`
     min-width: 340px;
@@ -18,7 +16,7 @@ const Container = styled.div`
     height: fit-content;
     ${props => props.editStyle}
 
-    ${props => props.Modal && `
+    ${props => props.modal && `
         height: fit-content;
         overflow-y: auto;
         overflow-x: hidden;
@@ -40,11 +38,11 @@ const Container = styled.div`
 
 
 const ListInformations = (props) => {
-    return <Container editStyle={props.editStyle} Modal={props.Modal}>
+    return <Container style={props.editStyle} modal={props.modal}>
         <h1>{props.Title}</h1>
         {
-            props.Informations.map((info) => (
-                <Information key={info.title} Title={info.title} Informations={info.infos} Tags={info.tags} />
+            props.Informations.map((info, index) => (
+                <Information key={index} Title={info.title} Informations={info.infos} Tags={info.tags} />
             ))
         }
     </Container >

@@ -9,7 +9,6 @@ const Icon = styled.i`
     margin-left: 20px;
 `
 
-
 const ButtonNav = styled.button`
     display: flex;
     align-items: center;

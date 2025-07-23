@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import ContainerMainContent from './ContainerMainContent';
-import Card from './Card';
-import Chat from './Chat';
-import Modal from './Modal';
+import ContainerMainContent from '../../Components/ContainerMainContent';
+import Card from '../../Components/Card';
+import Chat from '../../Components/Chat';
+import Modal from '../../Components/Modal';
 
 const ContainerCards = styled.div`
     width: 100%;
@@ -12,7 +12,7 @@ const ContainerCards = styled.div`
     gap: 30px;
 `
 
-const Conversations = () => {
+const ConversationsProvider = () => {
     const [modal, setModal] = React.useState(false);
 
     function handleClickModal(event) {
@@ -68,4 +68,4 @@ const Conversations = () => {
     </ContainerMainContent>
 }
 
-export default Conversations;
+export default ConversationsProvider;

@@ -35,21 +35,22 @@ const NameLogo = styled.h1`
     margin-right: 20px;
 `
 
-const NavLeft = () => {
+const NavigationProvider = () => {
     return <NavigationLeft>
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/provider" style={{ textDecoration: 'none' }}>
             <TopNavigation>
                 <Logo src={logo} />
                 <NameLogo>Marketplace</NameLogo>
             </TopNavigation>
         </Link>
-        <ButtonNavigation Icon='pi pi-chart-pie' Caminho="/overview">Visão Geral</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-file-edit' Caminho="/demands">Demandas</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-file-import' Caminho="/proposals">Propostas</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-users' Caminho="/research-group">Grupos Pesquisa</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-comments' Caminho="/conversations">Conversas</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-chart-pie' Caminho="/provider/overview">Visão Geral</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-file-edit' Caminho="/provider/demands">Demandas</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-file-import' Caminho="/provider/proposals">Propostas</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-file-check' Caminho="/provider/projects">Projetos</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-users' Caminho="/provider/research-group">Grupos Pesquisa</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-comments' Caminho="/provider/conversations">Conversas</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-user'>Perfil</ButtonNavigation>
     </NavigationLeft>
 }
 
-export default NavLeft;
+export default NavigationProvider;

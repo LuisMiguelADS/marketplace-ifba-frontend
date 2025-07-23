@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import Select from './Forms/Select';
-import useForm from '../Hooks/useForm';
-import Button from './Forms/Button';
-import Input from './Forms/Input';
-import Card from './Card';
-import ListInformations from './ListInformations';
-import ContainerMainContent from './ContainerMainContent';
-import FormFilter from './FormFilter';
-import Modal from './Modal';
-import SendDemand from './SendDemand';
+import Select from '../../Components/Forms/Select';
+import useForm from '../../Hooks/useForm';
+import Button from '../../Components/Forms/Button';
+import Input from '../../Components/Forms/Input';
+import Card from '../../Components/Card';
+import ListInformations from '../../Components/ListInformations';
+import ContainerMainContent from '../../Components/ContainerMainContent';
+import FormFilter from '../../Components/FormFilter';
+import Modal from '../../Components/Modal';
+import SendDemand from '../../Components/SendDemand';
 
 const ContainerCards = styled.div`
     width: 100%;
@@ -25,7 +25,7 @@ const ContainerButtons = styled.div`
     align-items: flex-end;
 `
 
-const GroupResearch = () => {
+const GroupResearchProvider = () => {
     const searchDemand = useForm();
     const areaSelect = useForm();
     const demandSelect = useForm();
@@ -109,12 +109,11 @@ const GroupResearch = () => {
         </ContainerCards>
 
         {(viewDetails) && <div>
-            <ListInformations Title="Web Soluções" Informations={[informationsGeneral, aboutGroup]} />,
+            <ListInformations Title="Web Soluções" Informations={[informationsGeneral, aboutGroup]} />
             <ContainerButtons>
-                <Button onClick={handleClickModal} editStyle={{ padding: '20px 40px' }}>Propor Demanda</Button>
+                <Button onClick={handleClickModal} editStyle={{ marginTop: '20px' }}>Propor Demanda</Button>
             </ContainerButtons>
-        </div>
-        }
+        </div>}
         <Modal SetModal={setModal} View={modal}>
             <SendDemand Title="Web Soluções" Informations={[informationsGeneral]}>
                 <div style={{
@@ -132,4 +131,4 @@ const GroupResearch = () => {
     </ContainerMainContent>
 }
 
-export default GroupResearch;
+export default GroupResearchProvider;
