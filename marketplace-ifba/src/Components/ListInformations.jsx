@@ -6,18 +6,18 @@ const Container = styled.div`
     min-width: 340px;
     max-width: 1000px;
     position: relative;
-    background-color: #D6FFDE;
+    background-color: white;
     padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
     border-radius: var(--standard-border);
-    box-shadow: 0 0 5px 1px #018d1b40;
+    box-shadow: 0px 2px 8px #0000004b;
     height: fit-content;
+
     ${props => props.editStyle}
 
     ${props => props.modal && `
-        height: fit-content;
         overflow-y: auto;
         overflow-x: hidden;
 
@@ -42,7 +42,7 @@ const ListInformations = (props) => {
         <h1>{props.Title}</h1>
         {
             props.Informations.map((info, index) => (
-                <Information key={index} Title={info.title} Informations={info.infos} Tags={info.tags} />
+                <Information key={index} Title={info.title} Informations={info.infos} Tags={info.tags} WithBackground={(index === 0) ? 'true' : 'false'} />
             ))
         }
     </Container >

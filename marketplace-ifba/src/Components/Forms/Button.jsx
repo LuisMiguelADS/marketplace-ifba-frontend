@@ -6,7 +6,7 @@ const StyledButton = styled.button`
     cursor: pointer;
     border: none;
     border-radius: var(--standard-border);
-    background: #025911;
+    background: #257e34;
     color: white;
     min-width: 200px;
     min-height: 50px;
@@ -28,21 +28,21 @@ const StyledButton = styled.button`
 `
 
 const StyledButtonRecused = styled(StyledButton)`
-    background: #e60000;
+    background: #e03030fd;
     color: white;
 
     &:hover, &:focus {
-      background: #ff0000dc;
+      background: #ff0000;
       box-shadow: 0 0 0 1px #ff0000dc, 0 0 0 2px #e60000;
     }
 `
 
 const StyledButtonEdited = styled(StyledButton)`
-    background: #ffff00;
+    background: #ffff00b3;
     color: black;
 
     &:hover, &:focus {
-      background: #ffff00d4;
+      background: #ffff00;
       box-shadow: 0 0 0 1px #ffff00d4, 0 0 0 2px #ffff00;
     }
 `

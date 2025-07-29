@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import Button from '../Components/Forms/Button';
+import { useNavigate } from 'react-router-dom';
 
 export const GlobalStyle = createGlobalStyle`
   *, *::before, *::after {
@@ -354,7 +355,7 @@ const cardStepsRequester = [
     icon: 'pi pi-file',
     passo: '1',
     title: 'Defina sua Necessidade',
-    description: 'Para definir um grupo de pesquisa para o seu projeto, você terá duas opções: publicar a demanda de forma detalhada para que o grupos visualizem ou explorar os grupos disponíveis e escolher o que mais se encaixa no seu problema.'
+    description: 'Descreva sua necessidade de forma detalhada para encontrar pessoas que possam solucioná-la. Nesse caso, aceite propostas de grupos interessados ou envie diretamente para um grupo que gerou interesse.'
   },
   {
     icon: 'pi pi-comments',
@@ -372,7 +373,7 @@ const cardStepsRequester = [
     icon: 'pi pi-check-circle',
     passo: '4',
     title: 'Finalize com Sucesso',
-    description: 'Após a conclusão, realize os tramites finais, como efetuar o pagamento e deixe sua avaliação para fortalecer nosso ecossistema.'
+    description: 'Após a conclusão, realize as formalidades finais, como efetuar o pagamento e deixe sua avaliação para fortalecer nosso ecossistema.'
   }
 ]
 
@@ -381,13 +382,13 @@ const cardStepsProvider = [
     icon: 'pi pi-crown',
     passo: '1',
     title: 'Mostre seu Potencial',
-    description: 'Para definir uma demanda e começar a desenvolver uma solução, você terá duas opções: criar umgrupo de pesquisa e tornar disponível para receber ofertas de demanda ou procurar por alguma demanda específica.       '
+    description: 'Junte-se a grupos de pesquisa e comece a desenvolver soluções. Sendo assim, o grupo pode aceitar demandas ou procurar uma que gerou interesse.'
   },
   {
     icon: 'pi pi-file-check',
     passo: '2',
     title: 'Apresente a Proposta',
-    description: 'Após encontrar uma demanda que interesse a equipe ou receba uma demanda, realize propostas detalhadas, converse com o demandante a partir do chat privado para alinhar expetativas e formalize os termos da parceria de forma clara e profissional.'
+    description: 'Após aceitar uma demanda ou selecionar uma demanda específica, realize propostas detalhadas e converse com o demandante a partir do chat privado, para alinhar o projeto e expectativas. Formalize os termos de parceria de forma profissional.'
   },
   {
     icon: 'pi pi pi-cog',
@@ -399,16 +400,25 @@ const cardStepsProvider = [
     icon: 'pi pi-star-fill',
     passo: '4',
     title: 'Finalize com Sucesso',
-    description: 'Após a conclusão, realize os tramites finais, como receber o pagamento e deixe sua avaliação para fortalecer nosso ecossistema.'
+    description: 'Após a conclusão, realize as formalidades finais e deixe sua avaliação para fortalecer nosso ecossistema.'
   }
 ]
 
 function Home() {
   const [demand, setDemand] = React.useState(true);
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     setDemand(!demand);
   };
+
+  const handleClickButtonsHeader = (event) => {
+    if (event.target.name === 'login') {
+      navigate("/login")
+    } else if (event.target.name === 'register') {
+      navigate("/register")
+    }
+  }
 
   return (
     <Container>
@@ -421,15 +431,15 @@ function Home() {
           <a href="">Instituições</a>
         </Options>
         <BtnLoginCadastro >
-          <Button editStyle={{ backgroundColor: 'white', border: '1px solid #025911', color: '#00420c', minWidth: '100px' }}>Entrar</Button>
-          <Button editStyle={{ minWidth: '100px' }}>Cadastro</Button>
+          <Button name='login' onClick={handleClickButtonsHeader} editStyle={{ backgroundColor: 'white', border: '1px solid #025911', color: '#00420c', minWidth: '100px' }}>Entrar</Button>
+          <Button name='register' onClick={handleClickButtonsHeader} editStyle={{ minWidth: '100px' }}>Cadastro</Button>
         </BtnLoginCadastro>
       </Header>
 
       <Hero>
         <Title>Conectando <span style={{ color: '#FFE522' }}>Inovação</span> e <span style={{ color: '#FFE522' }}>Tecnologia</span></Title>
         <SubTitle>
-          Plataforma que une instituições tecnológicas e grupos de pesquisa com empresas que precisam resolver problemas e desafios através da ciência, tecnologia e inovação.
+          Plataforma que une instituições tecnológicas e grupos de pesquisa com organizações que precisam resolver problemas e desafios através da ciência, tecnologia e inovação.
         </SubTitle>
         <ContainerHeroButtons>
           <HeroButton>

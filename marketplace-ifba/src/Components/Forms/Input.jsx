@@ -40,6 +40,20 @@ const Textarea = styled.textarea`
     min-height: 80px;
     resize: none;
     transition: 0.2s;
+    margin-top: 5px;
+
+    &:focus, &:hover {
+      outline: none;
+      background-color: white;
+      box-shadow: 0 0 5px 1px #018D1A;
+    }
+`
+
+const InputFile = styled.input`
+    width: 100%;
+    font-size: 1.1rem;
+    border-radius: var(--standard-border);
+    transition: 0.2s;
 
     &:focus, &:hover {
       outline: none;
@@ -67,7 +81,19 @@ const Input = ({ label, type, name, value, onChange, error, onBlur, placeholder,
           onChange={onChange}
           value={value}
           onBlur={onBlur}
-          row='5'
+          placeholder={placeholder}
+          style={editStyle}
+        />);
+      break;
+    case 'file':
+      inputElement = (
+        <InputFile
+          id={name}
+          name={name}
+          type={type}
+          onChange={onChange}
+          value={value}
+          onBlur={onBlur}
           placeholder={placeholder}
           style={editStyle}
         />);
@@ -89,7 +115,9 @@ const Input = ({ label, type, name, value, onChange, error, onBlur, placeholder,
   return (
     <Container style={{
       width: definitionMaxWidth,
-      ...(type === 'textarea' && name !== 'message' ? { height: '110px' } : {})
+      ...(type === 'textarea' && name !== 'message' ? { height: '110px' } : {}),
+      ...(type === 'textarea' && name === 'biograph' ? { height: '200px' } : {}),
+      ...(type === 'file' ? { height: '60px' } : {})
     }}>
       {label && <Label htmlFor={name}>{label}</Label>}
       {inputElement}

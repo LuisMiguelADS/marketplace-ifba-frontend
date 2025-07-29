@@ -154,7 +154,7 @@ const Chat = (props) => {
             })}
         </Messages>
         <SendMessage>
-            <Input editStyle={{ width: '870px' }} type="textarea" name="message" {...contentMessage} placeholder="Escreva..." />
+            <Input editStyle={{ width: '870px', marginTop: '-1px' }} type="textarea" name="message" {...contentMessage} placeholder="Escreva..." />
             <SendButton className='pi pi-send' />
         </SendMessage>
     </Container>

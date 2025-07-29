@@ -3,22 +3,23 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { UserContext } from './UserContext';
 
 const ProtectedRouter = ({ allowedRoles }) => {
-    const { login, hasRole, user, loadingAutoLogin } = React.useContext(UserContext);
+    const { login, hasRole, loadingAutoLogin, awaitUserContext } = React.useContext(UserContext);
 
     if (loadingAutoLogin) {
-        console.log("ProtectedRouter: Auto-login em andamento...");
+        console.log("[PROTECTEDROUTER]: Tentativa de Login automático");
         return null;
     }
 
-    if (!login) {
-        console.log("ProtectedRouter: Não logado após auto-login, redirecionando para /login.");
-        return <Navigate to="/login" replace />;
+    if (awaitUserContext) {
+        if (!login) {
+            console.log("[PROTECTEDROUTER]: Não foi possivel realizar o Login de maneira automática, redirecionando para página de Login");
+            return <Navigate to="/login" replace />;
+        } else if (hasRole(allowedRoles)) {
+            console.log("[PROTECTEDROUTER]: Login automático realizado");
+            return <Outlet />;
+        }
     }
 
-    if (user && hasRole(allowedRoles)) {
-        console.log("ProtectedRouter: Usuário logado e com permissão, renderizando Outlet.");
-        return <Outlet />;
-    }
 }
 
 export default ProtectedRouter;

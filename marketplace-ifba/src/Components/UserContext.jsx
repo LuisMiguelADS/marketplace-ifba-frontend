@@ -1,5 +1,5 @@
 import React from 'react';
-import { LOGIN_POST, USER_VIA_TOKEN_GET } from './api';
+import { LOGIN_POST, USER_VIA_TOKEN_GET, ORGANIZACAO_ID_GET } from './api';
 import useFetch from '../Hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,33 +10,37 @@ export const UserStorage = ({ children }) => {
     const { request, data, error, setData, setError, setLoading } = useFetch();
     const [user, setUser] = React.useState(null);
     const [login, setLogin] = React.useState(false);
-    const [loadingAutoLogin, setloadingAutoLogin] = React.useState(false);
+    const [loadingAutoLogin, setLoadingAutoLogin] = React.useState(false);
     const navigate = useNavigate();
+    const [awaitUserContext, setAwaitUserContext] = React.useState(false);
+    const [organizacao, setOrganizacao] = React.useState(null);
 
     async function getUserData(token) {
         try {
             const { url, options } = USER_VIA_TOKEN_GET(token);
             const { response, json } = await request(url, options);
             if (response.ok) {
+                setUser(json);
                 setLogin(true);
-                setUser(json.user);
-            } else {
-                userLogout();
+                console.log("[USERCONTEXT] Usuário logado via token");
             }
         } catch (err) {
-            console.error("Falha ao buscar dados do usuário:", err);
+            console.error("[USERCONTEXT] Falha ao buscar dados do usuário:", err);
             userLogout();
         } finally {
-            setloadingAutoLogin(false);
+            setLoadingAutoLogin(false);
         }
     }
 
     React.useEffect(() => {
+        setAwaitUserContext(true);
         async function autoLogin() {
             const token = window.localStorage.getItem('token_autenticacao');
             if (token) {
-                setloadingAutoLogin(true);
+                setLoadingAutoLogin(true);
                 await getUserData(token);
+            } else {
+                setLoadingAutoLogin(false);
             }
         }
         autoLogin();
@@ -51,12 +55,11 @@ export const UserStorage = ({ children }) => {
             setUser(json.user);
             setLogin(true);
             navigate('requester/overview');
-            console.log('Logando');
+            console.log('[USERCONTEXT] Logando');
         } else {
-            console.log('Falha no Login');
+            console.log('[USERCONTEXT] Falha no Login');
             setLogin(false);
         }
-
     }
 
     function userLogout() {
@@ -67,19 +70,42 @@ export const UserStorage = ({ children }) => {
         setUser(null);
         window.localStorage.removeItem('token_autenticacao');
         navigate('/login');
-        console.log('Deslogando');
+        console.log('[USERCONTEXT] Deslogando');
     }
 
     const hasRole = (requiredRole) => {
-        if (!user || !user.role) return false;
+        if (!user || !user.role) {
+            console.log("[USERCONTEXT] Sem permissão")
+            console.log(user)
+            return false;
+        }
         if (Array.isArray(requiredRole)) {
             return requiredRole.includes(user.role);
         }
         return user.role === requiredRole;
     };
 
+    React.useEffect(() => {
+        async function fetchData() {
+            if (user !== null && user.idOrganizacao !== null) {
+                const token = window.localStorage.getItem('token_autenticacao');
+                const { url, options } = ORGANIZACAO_ID_GET(user.idOrganizacao, token);
+                const { response, json } = await request(url, options);
+                if (response.ok) {
+                    setOrganizacao(json);
+                    console.log('[USERCONTEXT]: Busca organização via ID realizada com sucesso');
+                } else {
+                    console.log('[USERCONTEXT]: Falha na busca organização via ID');
+                }
+            } else {
+                console.log('[USERCONTEXT]: Usuário não tem organização ainda');
+            }
+        }
+        fetchData();
+    }, [user]);
+
     return (
-        <UserContext.Provider value={{ userLogin, data, login, userLogout, error, loadingAutoLogin, hasRole, user }}>
+        <UserContext.Provider value={{ userLogin, data, login, userLogout, error, loadingAutoLogin, hasRole, user, awaitUserContext, organizacao }}>
             {children}
         </UserContext.Provider>
     )

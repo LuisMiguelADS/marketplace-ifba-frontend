@@ -7,6 +7,9 @@ import Button from '../../Components/Forms/Button';
 import Delivery from '../../Components/Delivery';
 import Modal from '../../Components/Modal';
 import NewDeliveryForm from '../../Components/NewDeliveryForm';
+import FormFilter from '../../Components/FormFilter';
+import useForm from '../../Hooks/useForm';
+import Select from '../../Components/Forms/Select';
 
 const ContainerCards = styled.div`
     width: 100%;
@@ -79,6 +82,7 @@ const ProjectsRequester = () => {
     const [viewDetails, setViewDetails] = React.useState(false);
     const [modal, setModal] = React.useState(false);
     const [modalNewDelivery, setModalNewDelivery] = React.useState(false);
+    const statusSelect = useForm();
 
     function handleClickModal(event) {
         event.preventDefault();
@@ -95,6 +99,12 @@ const ProjectsRequester = () => {
         setViewDetails(!viewDetails);
     }
 
+    const options = [
+        { value: 'option1', label: 'Option 1' },
+        { value: 'option2', label: 'Option 2' },
+        { value: 'option3', label: 'Option 3' }
+    ];
+
     return (
         <ContainerMainContent>
             <h1>Projetos</h1>
@@ -103,11 +113,16 @@ const ProjectsRequester = () => {
                 <Card IconContainer="pi pi-file-check" Title="Landing Page" Infos={['Instituição: IFBA', 'Início: 10/07/2025', 'Previsão: 10/10/2025']} Status="Em desenvolvimento" ColorStatus="green" HideView="no" onClick={handleClickViewDetails} />
                 <Card IconContainer="pi pi-file-check" Title="Landing Page" Infos={['Instituição: IFBA', 'Início: 10/07/2025', 'Previsão: 10/10/2025']} Status="Em desenvolvimento" ColorStatus="green" HideView="no" onClick={handleClickViewDetails} />
             </ContainerCards>
+            <h1>Selecione um Projeto</h1>
             {(viewDetails) && <>
                 <ListInformations Title="Landing Page" Informations={[informationsGeneral, aboutProject, timeline, state]} />
             </>}
             {(viewDetails) && <>
-                <h1>Entregas</h1>
+                <h1>Solicitações de Entregas</h1>
+                <FormFilter Title='Filtrar grupos' LabelButton="Buscar">
+                    <Select options={options} label="Status" name="area-select" {...statusSelect} optionTitle="Selecione uma área" />
+                </FormFilter>
+                <h1>Resultados</h1>
                 <ContainerCards>
                     <Card IconContainer="pi pi-file-plus" Title="HTML" Infos={['Criado: Web Soluções', 'Prazo: 10/07/2025', 'Entrega: 10/10/2025']} Status="Em desenvolvimento" ColorStatus="green" HideView="no" onClick={handleClickModal} />
                     <Card IconContainer="pi pi-file-plus" Title="HTML" Infos={['Criado: Web Soluções', 'Prazo: 10/07/2025', 'Entrega: 10/10/2025']} Status="Em desenvolvimento" ColorStatus="green" HideView="no" onClick={handleClickModal} />
@@ -117,7 +132,7 @@ const ProjectsRequester = () => {
                     <Button onClick={handleClickModalNewDelivery} editStyle={{ alignSelf: 'flex-start' }}>Nova Entrega</Button>
                 </ContainerButtons>
             </>}
-            <Modal SetModal={setModal} View={modal} ButtonEdit ButtonRecused ButtonConfirm>
+            <Modal SetModal={setModal} View={modal} ButtonEdit ButtonCanceled ButtonConfirm>
                 <Delivery Title='HTML' Informations={[
                     {
                         title: 'Sobre a Entrega',
@@ -142,7 +157,6 @@ const ProjectsRequester = () => {
                         }]
                     }
                 ]}>
-
                 </Delivery>
             </Modal>
             <Modal SetModal={setModalNewDelivery} View={modalNewDelivery}>

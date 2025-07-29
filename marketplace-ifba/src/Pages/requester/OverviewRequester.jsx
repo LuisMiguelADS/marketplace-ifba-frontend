@@ -5,6 +5,7 @@ import ListInformations from '../../Components/ListInformations';
 import Modal from '../../Components/Modal';
 import Card from '../../Components/Card';
 import useFetch from '../../Hooks/useFetch';
+import { TODAS_DEMANDAS_GET } from '../../Components/api';
 
 const ContainerCards = styled.div`
     width: 100%;
@@ -19,8 +20,14 @@ const OverviewRequester = () => {
 
     React.useEffect(() => {
         async function fetchData() {
-            const { response, json } = await request('http://localhost:8080/geral/allDemands');
-            console.log(response, json);
+            const token = window.localStorage.getItem('token_autenticacao');
+            const { url, options } = TODAS_DEMANDAS_GET(token);
+            const { response } = await request(url, options);
+            if (response.ok) {
+                console.log('[OVERVIEWREQUESTER]: Sucesso na busca por demandas');
+            } else {
+                console.log('[OVERVIEWREQUESTER]: Falha na busca por demandas');
+            }
         }
         fetchData();
     }, [request]);
@@ -41,13 +48,13 @@ const OverviewRequester = () => {
                     <Card
                         key={index}
                         IconContainer="pi pi-file-edit"
-                        Title={demand.titleDemand}
+                        Title={demand.nome}
                         Infos={[
-                            'Data Cadastro: ' + new Date(demand.dateTermDemand).toLocaleDateString('pt-BR'),
-                            demand.organizationAprovation === true ? 'Demanda Aprovada' : 'Aguardando Aprovação'
+                            'Data Cadastro: ' + new Date(demand.dataPrazoFinal).toLocaleDateString('pt-BR'),
+                            demand.status === "NAO_APROVADA" ? 'Demanda não Aprovada' : 'Demanda Aprovada'
                         ]}
                         HideView="yes"
-                        CountViews={demand.views}
+                        CountViews={demand.visualizacoes}
                         Status={demand.status}
                         ColorStatus="red"
                         onClick={() => handleClickModal(demand)}
@@ -70,26 +77,26 @@ const OverviewRequester = () => {
         </ContainerCards>
         <Modal SetModal={setModal} View={modal}>
             <ListInformations
-                Title={selectedDemand && selectedDemand.titleDemand}
+                Title={selectedDemand && selectedDemand.nome}
                 Informations={[
                     {
                         title: 'Informações Gerais',
                         infos: [
                             {
                                 subTitle: 'Organização',
-                                description: selectedDemand && selectedDemand.organization && selectedDemand.organization.name
+                                description: selectedDemand && selectedDemand.organizacao && selectedDemand.organizacao.nome
                             },
                             {
                                 subTitle: 'Email Responsável',
-                                description: selectedDemand && selectedDemand.emailResponsible
+                                description: selectedDemand && selectedDemand.emailResponsavel
                             },
                             {
                                 subTitle: 'Data Cadastro',
-                                description: new Date(selectedDemand && selectedDemand.dateTermDemand).toLocaleDateString('pt-BR')
+                                description: new Date(selectedDemand && selectedDemand.dataPrazoFinal).toLocaleDateString('pt-BR')
                             },
                             {
                                 subTitle: 'Data Aprovação',
-                                description: selectedDemand && selectedDemand.dateApprovedDemand ? new Date(selectedDemand.dateApprovedDemand).toLocaleDateString('pt-BR') : 'Ainda não foi aprovado'
+                                description: selectedDemand && selectedDemand.dataAprovacao ? new Date(selectedDemand.dateApprovedDemand).toLocaleDateString('pt-BR') : 'Ainda não foi analisada'
                             },
                         ]
                     },
@@ -98,19 +105,19 @@ const OverviewRequester = () => {
                         infos: [
                             {
                                 subTitle: 'Orçamento',
-                                description: 'R$ ' + (selectedDemand?.budget ?? 'Não informado')
+                                description: 'R$ ' + (selectedDemand?.orcamento ?? 'Não informado')
                             },
                             {
                                 subTitle: 'Descrição',
-                                description: selectedDemand && selectedDemand.description
+                                description: selectedDemand && selectedDemand.descricao
                             },
                             {
                                 subTitle: 'Resumo',
-                                description: selectedDemand && selectedDemand.resum
+                                description: selectedDemand && selectedDemand.resumo
                             },
                             {
                                 subTitle: 'Critérios',
-                                description: selectedDemand && selectedDemand.criteria
+                                description: selectedDemand && selectedDemand.criterio
                             }
                         ]
                     },
@@ -123,12 +130,12 @@ const OverviewRequester = () => {
                             },
                             {
                                 subTitle: 'Views',
-                                description: selectedDemand && selectedDemand.views
+                                description: selectedDemand && selectedDemand.visualizacoes
                             }
                         ]
                     }
                 ]}
-                editStyle={{ maxHeight: '700px' }}
+                editStyle={{ maxHeight: '700px', minWidth: '1000px' }}
                 modal />
         </Modal>
     </ContainerMainContent>

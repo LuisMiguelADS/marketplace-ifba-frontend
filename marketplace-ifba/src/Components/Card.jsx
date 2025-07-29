@@ -15,7 +15,9 @@ const Container = styled.div`
     cursor: pointer;
 
     &:hover {
-       
+        transform: translateY(-15px);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 0 8px 8px #00000039;
     }
 `
 

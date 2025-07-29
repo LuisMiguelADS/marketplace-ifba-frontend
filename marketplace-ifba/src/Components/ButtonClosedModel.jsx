@@ -15,6 +15,16 @@ const ButtonClosed = styled.button`
       background: red;
       box-shadow: 0 0 0 1px #e60000b8, 0 0 0 2px #ff0000;
     }
+    animation: left 1s ease;
+
+    @keyframes left {
+      0% {
+        transform: translateY(-100px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
 `
 
 const ButtonClosedModel = ({ onClick }) => {

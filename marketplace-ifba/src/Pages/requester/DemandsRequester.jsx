@@ -5,6 +5,7 @@ import NewDemandForm from '../../Components/NewDemandForm';
 import ContainerMainContent from '../../Components/ContainerMainContent';
 import ListInformations from '../../Components/ListInformations';
 import Modal from '../../Components/Modal';
+import Button from '../../Components/Forms/Button';
 
 const ContainerCards = styled.div`
     width: 100%;
@@ -66,23 +67,32 @@ const requiredResources = {
 };
 
 const DemandsRequester = () => {
-    const [modal, setModal] = React.useState(false);
+    const [modalOnDemand, setModalOnDemand] = React.useState(false);
+    const [modalFormNewDemand, setModalFormNewDemand] = React.useState(false);
 
     function handleClickModal(event) {
         event.preventDefault();
-        setModal(!modal);
+        setModalOnDemand(!modalOnDemand);
+    }
+
+    function handleClickFormModal(event) {
+        event.preventDefault();
+        setModalFormNewDemand(!modalFormNewDemand);
     }
 
     return <ContainerMainContent>
         <h1>Demandas</h1>
         <ContainerCards>
-            <Card IconContainer="pi pi-send" Title="Landing Page" Infos={['Aguardando aprovação', 'Cadastro: 20/12/2025']} HideView="no" CountViews="10" Status="Aguardando Propostas" ColorStatus="#4b56d5" onClick={handleClickModal} />
-            <Card IconContainer="pi pi-send" Title="Landing Page" Infos={['Aguardando aprovação', 'Cadastro: 20/12/2025']} HideView="no" CountViews="10" Status="Aguardando Propostas" ColorStatus="#4b56d5" onClick={handleClickModal} />
-            <Card IconContainer="pi pi-send" Title="Landing Page" Infos={['Aguardando aprovação', 'Cadastro: 20/12/2025']} HideView="no" CountViews="10" Status="Aguardando Propostas" ColorStatus="#4b56d5" onClick={handleClickModal} />
+            <Card IconContainer="pi pi-send" Title="Landing Page" Infos={['Aguardando aprovação', 'Cadastro: 20/12/2025']} HideView="no" CountViews="10" Status="Aguardando Propostas" ColorStatus="orange" onClick={handleClickModal} />
+            <Card IconContainer="pi pi-send" Title="Landing Page" Infos={['Aguardando aprovação', 'Cadastro: 20/12/2025']} HideView="no" CountViews="10" Status="Aguardando Propostas" ColorStatus="orange" onClick={handleClickModal} />
+            <Card IconContainer="pi pi-send" Title="Landing Page" Infos={['Aguardando aprovação', 'Cadastro: 20/12/2025']} HideView="no" CountViews="10" Status="Aguardando Propostas" ColorStatus="orange" onClick={handleClickModal} />
         </ContainerCards>
         <h1>Nova Demanda</h1>
-        <NewDemandForm />
-        <Modal SetModal={setModal} View={modal} ButtonEdit ButtonRecused>
+        <Button editStyle={{ alignSelf: 'flex-start' }} onClick={handleClickFormModal}>Criar Demanda</Button>
+        <Modal SetModal={setModalFormNewDemand} View={modalFormNewDemand} ButtonCreate>
+            <NewDemandForm editStyle={{ overflowY: 'scroll', width: '1000px', maxHeight: '700px' }} modal />
+        </Modal>
+        <Modal SetModal={setModalOnDemand} View={modalOnDemand} ButtonEdit ButtonRecused>
             <ListInformations
                 Title="Web Soluções"
                 Informations={[informationsGeneral, aboutProposal, restrictions, requiredResources]}

@@ -5,12 +5,13 @@ import { UserContext } from '../UserContext';
 const Container = styled.div`
     display: flex;
     grid-template-columns: 1fr 1fr;
-    width: 220px;
     max-height: 60px;
+    gap: 20px;
     align-self: flex-end;
     align-items: center;
     margin-right: 30px;
     justify-content: space-between;
+    color: black;
 `
 
 const FotoPerfil = styled.img`
@@ -23,7 +24,6 @@ const ContainerInfos = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
-    color: white;
 `
 
 const NameUserLogged = styled.p`
@@ -36,7 +36,6 @@ const OrgOrEnterprise = styled.p`
 `
 
 const IconLogOut = styled.span`
-    color: white;
     font-size: 1.5rem;
     cursor: pointer;
 

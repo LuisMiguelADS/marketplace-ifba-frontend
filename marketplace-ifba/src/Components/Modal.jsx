@@ -6,7 +6,7 @@ import ButtonClosedModel from './ButtonClosedModel';
 const StyledModal = styled.div`
     height: 100%;
     width: 100vw;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.665);
     position: absolute;
     top: 0;
     left: 0;
@@ -40,6 +40,19 @@ const ContainerButtons = styled.div`
     position: relative;
 `
 
+const DivEffect = styled.div`
+    animation: left 1s ease;
+
+    @keyframes left {
+      0% {
+        transform: translateY(-100px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+`
+
 const Modal = (props) => {
     if (!props.View) {
         return null;
@@ -58,13 +71,15 @@ const Modal = (props) => {
             <ButtonClosedModel onClick={handleOverlayClick} className="pi pi-times" />
         </ContainerButtons>
         <ContainerCancelPropagClick onClick={handleContentClick}>
-            {props.children}
+            <DivEffect >{props.children}</DivEffect>
         </ContainerCancelPropagClick>
-        {(props.ButtonEdit || props.ButtonRecused) && (
+        {(props.ButtonEdit || props.ButtonRecused || props.ButtonConfirm || props.ButtonCreate || props.ButtonCanceled) && (
             <ContainerButtons>
                 {props.ButtonEdit && <Button Edited>Editar</Button>}
                 {props.ButtonRecused && <Button Recused>Excluir</Button>}
+                {props.ButtonCanceled && <Button Recused>Cancelar</Button>}
                 {props.ButtonConfirm && <Button>Aceitar</Button>}
+                {props.ButtonCreate && <Button>Criar</Button>}
             </ContainerButtons>)}
     </StyledModal>
 };

@@ -35,8 +35,8 @@ const Label = styled.label`
     font-size: 1.3rem;
 `
 
-const Select = ({ options, label, name, onChange, optionTitle, value }) => {
-    return <Container>
+const Select = ({ options, label, name, onChange, optionTitle, value, definitionMaxWidth }) => {
+    return <Container style={{ width: definitionMaxWidth }}>
         {label && <Label htmlFor={name}>{label}</Label>}
         <StyledSelect value={value} name={name} id={name} onChange={onChange}>
             <Option defaultValue='' selected disabled>{optionTitle}</Option>

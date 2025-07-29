@@ -49,7 +49,7 @@ const FormLogin = () => {
                 definitionMaxWidth="100%"
             />
             {loading ? <Button>Carregando</Button> : <Button>Entrar</Button>}
-            {error && <p style={{ color: '#ff0404', marginTop: '10px' }}>Erro ao efetuar login!</p>}
+            {error && <p style={{ color: '#ff0404', marginTop: '350px', position: 'absolute' }}>Erro ao efetuar login!</p>}
         </Container>
     );
 };

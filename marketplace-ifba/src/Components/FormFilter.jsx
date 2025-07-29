@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import Button from './Forms/Button';
 
 const Form = styled.form`
-    background-color: #9EFFB0;
     display: flex;
     flex-direction: column;
     border-radius: var(--standard-border);
     padding: 30px;
     gap: 30px;
     width: fit-content;
+    box-shadow: 0px 2px 8px #0000004b;
 `
 
 const ContainerFields = styled.div`

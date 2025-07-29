@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../assets//logo_ifba.png';
-import FormLogin from '../Components/FormLogin';
+import FormRegister from '../Components/FormRegister';
 import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
@@ -42,18 +42,18 @@ const ContainerForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 60px 0px;
 `
 
-const ContainerLogin = styled.div`
+const ContainerRegister = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 20px;
-    margin-top: 100px;
 `
 
-const SpanButtonLogin = styled.div`
+const SpanButtonRegister = styled.div`
     text-decoration: underline;
     cursor: pointer;
     background-color: #01420C;
@@ -69,11 +69,11 @@ const SpanButtonLogin = styled.div`
     }
 `
 
-const Login = () => {
+const Register = () => {
     const navigate = useNavigate();
 
     const handleClickButtonRegister = () => {
-        navigate("/register")
+        navigate("/login")
     }
 
     return <Container>
@@ -81,13 +81,13 @@ const Login = () => {
             <Img src={logo} alt="Logo IFBA" />
         </ContainerImg>
         <ContainerForm>
-            <FormLogin />
-            <ContainerLogin>
-                <p>Não possui uma conta?</p>
-                <SpanButtonLogin onClick={handleClickButtonRegister}>Cadastra-se</SpanButtonLogin>
-            </ContainerLogin>
+            <FormRegister />
+            <ContainerRegister>
+                <p>Já possui uma conta?</p>
+                <SpanButtonRegister onClick={handleClickButtonRegister}>Entrar</SpanButtonRegister>
+            </ContainerRegister>
         </ContainerForm>
     </Container>
 }
 
-export default Login;
+export default Register;

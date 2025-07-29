@@ -49,6 +49,7 @@ const NavigationRequester = () => {
         <ButtonNavigation Icon='pi pi-file-check' Caminho="/requester/projects">Projetos</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-users' Caminho="/requester/research-group">Grupos Pesquisa</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-comments' Caminho="/requester/conversations">Conversas</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-building' Caminho="/requester/organization">Organização</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-user'>Perfil</ButtonNavigation>
     </NavigationLeft>
 }
