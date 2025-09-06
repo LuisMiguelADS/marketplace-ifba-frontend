@@ -36,7 +36,15 @@ const Header = styled.div`
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 15px 0px;
+  padding: 15px 20px;
+  
+  @media (max-width: 1200px) {
+    padding: 15px 40px;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 15px 20px;
+  }
 `
 
 const Options = styled.div`
@@ -57,11 +65,120 @@ const Options = styled.div`
       color: #004d00;
     }
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 const BtnLoginCadastro = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
+const HamburgerButton = styled.button`
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+
+  span {
+    width: 30px;
+    height: 3px;
+    background: #00420c;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+
+    &:first-child {
+      transform: ${({ $isOpen }) => $isOpen ? 'rotate(45deg)' : 'rotate(0)'};
+    }
+
+    &:nth-child(2) {
+      opacity: ${({ $isOpen }) => $isOpen ? '0' : '1'};
+      transform: ${({ $isOpen }) => $isOpen ? 'translateX(20px)' : 'translateX(0)'};
+    }
+
+    &:nth-child(3) {
+      transform: ${({ $isOpen }) => $isOpen ? 'rotate(-45deg)' : 'rotate(0)'};
+    }
+  }
+`
+
+const MobileMenu = styled.div`
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  transform: ${({ $isOpen }) => $isOpen ? 'translateX(0)' : 'translateX(100%)'};
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  padding: 80px 30px 30px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+`
+
+const MobileMenuOverlay = styled.div`
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: ${({ $isOpen }) => $isOpen ? '1' : '0'};
+  visibility: ${({ $isOpen }) => $isOpen ? 'visible' : 'hidden'};
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`
+
+const MobileMenuLink = styled.a`
+  text-decoration: none;
+  color: #00420c;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #004d00;
+  }
+`
+
+const MobileMenuButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
 `
 
 const Hero = styled.section`
@@ -84,24 +201,43 @@ const SubTitle = styled.p`
     max-width: 800px;
     text-align: center;
     font-size: 25px;
+    
+    @media (max-width: 768px) {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 `;
 
 const ContainerHeroButtons = styled.div`
     display: flex;
     gap: 30px;
     align-items: center;
+    
+    @media (max-width: 550px) {
+        flex-direction: column;
+        gap: 20px;
+    }
 `
 
 const HeroButton = styled(Button)`
-    background-color: ${props => props.isActive ? '#107421' : 'white'};
-    color: ${props => props.isActive ? 'white' : '#107421'};
+    background-color: ${props => props.$isActive ? '#107421' : 'white'};
+    color: ${props => props.$isActive ? 'white' : '#107421'};
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
     height: 60px;
+    min-width: 200px;
+    width: 200px;
+    padding: 0 20px;
     box-shadow: 0 3px 6px #00420c;
     transition: all 0.1s ease;
     position: relative;
+
+    @media (max-width: 768px) {
+        width: 260px;
+        min-width: 220px;
+    }
 
     &:hover {
       background-color: #107421;
@@ -121,9 +257,21 @@ const Icon = styled.i`
 `
 
 const Data = styled.div`
-    width: 1020px;
+    width: 100%;
+    max-width: 1020px;
     display: flex;
     justify-content: space-between;
+    padding: 0 20px;
+    
+    @media (max-width: 1200px) {
+        padding: 0 40px;
+    }
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
 `
 
 const DataItem = styled.div`
@@ -140,20 +288,30 @@ const WhyChooseUsContainer = styled.section`
     background: #fdfdfd;
     color: black;
     gap: 60px;
-    padding: 60px 0px;
+    padding: 60px 20px;
+    
+    @media (max-width: 1200px) {
+        padding: 60px 40px;
+    }
+    
+    @media (max-width: 768px) {
+        padding: 40px 20px;
+    }
 `
 
 const CardsWhyChooseUs = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  width: 100%;
   max-width: 1260px;
+  padding: 0 20px;
 
-  @media (max-width: 992px) {
+  @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     grid-template-columns: 1fr;
   }
 `
@@ -192,10 +350,18 @@ const ConnectionContainer = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  
+  @media (max-width: 1200px) {
+    padding: 5rem 3rem;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 3rem 2rem;
+  }
 `
 const ConnectionButton = styled(Button)`
-    background-color: ${props => props.isActive ? '#107421' : 'white'};
-    color: ${props => props.isActive ? 'white' : '#107421'};
+    background-color: ${props => props.$isActive ? '#107421' : 'white'};
+    color: ${props => props.$isActive ? 'white' : '#107421'};
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -215,12 +381,16 @@ const ConnectionButton = styled(Button)`
       background-color: #107421;
       color: white;
     }
+
+    @media (max-width: 768px) {
+        width: 260px;
+    }
 `
 
 const IconAnimationRight = styled.span`
-    animation: oscilar 2s ease-in-out infinite alternate;
+    animation: oscilarRight 2s ease-in-out infinite alternate;
 
-    @keyframes oscilar {
+    @keyframes oscilarRight {
       0% {
         transform: translateX(-4px);
       }
@@ -231,16 +401,65 @@ const IconAnimationRight = styled.span`
 `
 
 const IconAnimationLeft = styled.span`
-    animation: oscilar 2s ease-in-out infinite alternate;
-    animation-delay: 2s;
+    animation: oscilarLeft 2s ease-in-out infinite alternate;
 
-    @keyframes oscilar {
+    @keyframes oscilarLeft {
       0% {
         transform: translateX(4px);
       }
       100% {
         transform: translateX(-4px);
       }
+    }
+`
+
+const IconAnimationTop = styled.span`
+    animation: oscilarTop 2s ease-in-out infinite alternate;
+
+    @keyframes oscilarTop {
+      0% {
+        transform: translateY(-4px);
+      }
+      100% {
+        transform: translateY(4px);
+      }
+    }
+`
+
+const IconAnimationBottom = styled.span`
+    animation: oscilarBottom 2s ease-in-out infinite alternate;
+
+    @keyframes oscilarBottom {
+      0% {
+        transform: translateY(4px);
+      }
+      100% {
+        transform: translateY(-4px);
+      }
+    }
+`
+
+const ArrowContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    color: white;
+    gap: 5px;
+
+    .arrow-vertical {
+        display: none;
+    }
+
+    @media (max-width: 600px) {
+        flex-direction: row;
+        gap: 10px;
+        
+        .arrow-horizontal {
+            display: none;
+        }
+        
+        .arrow-vertical {
+            display: inline;
+        }
     }
 `
 
@@ -256,15 +475,24 @@ const StepCard = styled.div`
     flex-direction: row;
     align-items: center;
     gap: 20px;
-    padding: 20px;
+    padding: 10px;
     background-color: white;
     color: black;
-    height: 120px;
+    min-height: 120px;
     border-radius: 5px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.378);
     text-align: start;
 
     animation: left 1s ease;
+
+    @media (max-width: 768px) {
+        padding: 15px;
+    }
+
+    @media (max-width: 480px) {
+        align-items: flex-start;
+        gap: 10px;
+    }
 
     @keyframes left {
       0% {
@@ -286,12 +514,67 @@ const IconStep = styled.i`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 768px) {
+        min-width: 60px;
+        min-height: 60px;
+        font-size: 1.7rem;
+    }
+
+    @media (max-width: 480px) {
+        min-width: 50px;
+        min-height: 50px;
+        font-size: 1.4rem;
+    }
+
+    @media (max-width: 360px) {
+        min-width: 45px;
+        min-height: 45px;
+        font-size: 1.2rem;
+    }
 `
 
 const LineDesignStep = styled.div`
     min-width: 3px;
     height: 120px;
     background-color: #107421;
+
+    @media (max-width: 768px) {
+        height: 180px;
+    }
+
+    @media (max-width: 480px) {
+        display: none;
+    }
+`
+
+const StepContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    height: 100%;
+`
+
+const StepHeader = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+`
+
+const StepBadge = styled.p`
+    background-color: #107421;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    white-space: nowrap;
+    margin: 0;
 `
 
 const Footer = styled.footer`
@@ -301,27 +584,65 @@ const Footer = styled.footer`
     align-items: center;
     gap: 50px;
     padding: 50px 0px;
+
+    @media (max-width: 768px) {
+        padding: 30px 20px 50px 20px;
+        text-align: center;
+    }
+
+    p {
+        @media (max-width: 768px) {
+            text-align: center;
+            margin: 0;
+        }
+    }
 `
 
 const ContainerColumnsFooter = styled.div`
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     gap: 30px;
-    width: 1000px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
 `
 
 const ColumnFooter = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @media (max-width: 768px) {
+        align-items: center;
+        text-align: center;
+    }
 `
 
 const LineDesignFooter = styled.div`
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     min-height: 2px;
     background-color: #107421;
+    margin: 0 20px;
+
+    @media (max-width: 1200px) {
+        margin: 0 40px;
+    }
+
+    @media (max-width: 768px) {
+        width: 90%;
+        max-width: 400px;
+        margin: 0;
+    }
 `
+
+
 
 const cardInfos = [
   {
@@ -404,12 +725,23 @@ const cardStepsProvider = [
   }
 ]
 
+const TitleLogo = styled.h1`
+  color: #00420c;
+  font-size: 2rem;
+  font-weight: bold;
+`
+
 function Home() {
   const [demand, setDemand] = React.useState(true);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    setDemand(!demand);
+  const handleDemandanteClick = () => {
+    setDemand(true);
+  };
+
+  const handleDemandadoClick = () => {
+    setDemand(false);
   };
 
   const handleClickButtonsHeader = (event) => {
@@ -420,10 +752,18 @@ function Home() {
     }
   }
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  }
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  }
+
   return (
     <Container>
       <Header>
-        <h1 style={{ color: '#00420c', fontSize: '2rem' }}>Marketplace IFBA</h1>
+        <TitleLogo>Marketplace IFBA</TitleLogo>
         <Options>
           <a href="">Como funciona</a>
           <a href="">Projetos</a>
@@ -434,7 +774,24 @@ function Home() {
           <Button name='login' onClick={handleClickButtonsHeader} editStyle={{ backgroundColor: 'white', border: '1px solid #025911', color: '#00420c', minWidth: '100px' }}>Entrar</Button>
           <Button name='register' onClick={handleClickButtonsHeader} editStyle={{ minWidth: '100px' }}>Cadastro</Button>
         </BtnLoginCadastro>
+        <HamburgerButton $isOpen={isMenuOpen} onClick={toggleMenu}>
+          <span />
+          <span />
+          <span />
+        </HamburgerButton>
       </Header>
+
+      <MobileMenuOverlay $isOpen={isMenuOpen} onClick={closeMenu} />
+        <MobileMenu $isOpen={isMenuOpen}>
+        <MobileMenuLink href="">Como funciona</MobileMenuLink>
+        <MobileMenuLink href="">Projetos</MobileMenuLink>
+        <MobileMenuLink href="">Sobre</MobileMenuLink>
+        <MobileMenuLink href="">Instituições</MobileMenuLink>
+        <MobileMenuButtons>
+          <Button name='login' onClick={(e) => { handleClickButtonsHeader(e); closeMenu(); }} editStyle={{ backgroundColor: 'white', border: '1px solid #025911', color: '#00420c', minWidth: '100px' }}>Entrar</Button>
+          <Button name='register' onClick={(e) => { handleClickButtonsHeader(e); closeMenu(); }} editStyle={{ minWidth: '100px' }}>Cadastro</Button>
+        </MobileMenuButtons>
+      </MobileMenu>
 
       <Hero>
         <Title>Conectando <span style={{ color: '#FFE522' }}>Inovação</span> e <span style={{ color: '#FFE522' }}>Tecnologia</span></Title>
@@ -481,15 +838,17 @@ function Home() {
         <p style={{ fontSize: '1.1rem', marginTop: '-20px' }}>Descubra como conectar demandas e grupos de pesquisa de forma simples e eficaz.</p>
 
         <ContainerHeroButtons>
-          <ConnectionButton isActive={demand} onClick={handleButtonClick}>
+          <ConnectionButton $isActive={demand} onClick={handleDemandanteClick}>
             <Icon className='pi pi-building' />
             <p style={{ marginLeft: '20px' }}>Demandante</p>
           </ConnectionButton>
-          <div style={{ display: 'flex', flexDirection: 'column', color: 'white', gap: '5px' }}>
-            <IconAnimationRight className='pi pi-arrow-left' />
-            <IconAnimationLeft className='pi pi-arrow-right' />
-          </div>
-          <ConnectionButton isActive={!demand} onClick={handleButtonClick}>
+          <ArrowContainer>
+            <IconAnimationRight className='pi pi-arrow-right arrow-horizontal' />
+            <IconAnimationLeft className='pi pi-arrow-left arrow-horizontal' />
+            <IconAnimationTop className='pi pi-arrow-up arrow-vertical' />
+            <IconAnimationBottom className='pi pi-arrow-down arrow-vertical' />
+          </ArrowContainer>
+          <ConnectionButton $isActive={!demand} onClick={handleDemandadoClick}>
             <Icon className='pi pi-building-columns' />
             <p style={{ marginLeft: '20px' }}>Demandado</p>
           </ConnectionButton>
@@ -503,13 +862,13 @@ function Home() {
                   <StepCard key={index}>
                     <IconStep className={step.icon} />
                     <LineDesignStep />
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-around', height: '100%' }}>
-                      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                        <p style={{ backgroundColor: '#107421', padding: '5px', borderRadius: '5px', color: 'white' }}>Passo {step.passo}</p>
+                    <StepContent>
+                      <StepHeader>
+                        <StepBadge>Passo {step.passo}</StepBadge>
                         <h3>{step.title}</h3>
-                      </div>
-                      <p>{step.description}</p>
-                    </div>
+                      </StepHeader>
+                      <p style={{ margin: '10px 0', textAlign: 'justify' }}>{step.description}</p>
+                    </StepContent>
                   </StepCard>
                 )
               })}
@@ -523,13 +882,13 @@ function Home() {
                   <StepCard key={index}>
                     <IconStep className={step.icon} />
                     <LineDesignStep />
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-around', height: '100%' }}>
-                      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                        <p style={{ backgroundColor: '#107421', padding: '5px', borderRadius: '5px', color: 'white' }}>Passo {step.passo}</p>
+                    <StepContent>
+                      <StepHeader>
+                        <StepBadge>Passo {step.passo}</StepBadge>
                         <h3>{step.title}</h3>
-                      </div>
+                      </StepHeader>
                       <p>{step.description}</p>
-                    </div>
+                    </StepContent>
                   </StepCard>
                 )
               })}
