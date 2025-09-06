@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import Header from './Components/Header/Header';
 
 import Login from './Pages/Login';
@@ -35,6 +35,7 @@ function App() {
     <BrowserRouter>
       <UserStorage>
         <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
