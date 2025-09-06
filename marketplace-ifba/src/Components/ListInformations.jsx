@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Information from './Information';
+import Button from './Forms/Button';
 
 const Container = styled.div`
     min-width: 340px;
@@ -35,9 +36,8 @@ const Container = styled.div`
     `}
 `
 
-
-
 const ListInformations = (props) => {
+
     return <Container style={props.editStyle} modal={props.modal}>
         <h1>{props.Title}</h1>
         {
@@ -45,6 +45,27 @@ const ListInformations = (props) => {
                 <Information key={index} Title={info.title} Informations={info.infos} Tags={info.tags} WithBackground={(index === 0) ? 'true' : 'false'} />
             ))
         }
+        {(props.ButtonRecused || props.ButtonEdit || props.ButtonSucess) && (
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                {
+                    props.ButtonRecused && (
+                        <Button Recused>{props.ButtonRecused}</Button>
+                    )
+                }
+
+                {
+                    props.ButtonEdit && (
+                        <Button Edited>{props.ButtonEdit}</Button>
+                    )
+                }
+
+                {
+                    props.ButtonSucess && (
+                        <Button>{props.ButtonSucess}</Button>
+                    )
+                }
+            </div>
+        )}
     </Container >
 }
 

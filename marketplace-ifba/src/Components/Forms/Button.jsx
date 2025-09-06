@@ -38,12 +38,12 @@ const StyledButtonRecused = styled(StyledButton)`
 `
 
 const StyledButtonEdited = styled(StyledButton)`
-    background: #ffff00b3;
+    background:rgba(255, 255, 0, 0.69);
     color: black;
 
     &:hover, &:focus {
-      background: #ffff00;
-      box-shadow: 0 0 0 1px #ffff00d4, 0 0 0 2px #ffff00;
+      background:rgb(236, 236, 0);
+      box-shadow: 0 0 0 2px #ffff00d4, 0 0 0 2px rgb(131, 131, 1);
     }
 `
 

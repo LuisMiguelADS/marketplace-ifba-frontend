@@ -44,9 +44,10 @@ const NavigationProvider = () => {
             </TopNavigation>
         </Link>
         <ButtonNavigation Icon='pi pi-chart-pie' Caminho="/provider/overview">Visão Geral</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-file-edit' Caminho="/provider/demands">Ofertas</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-file-import' Caminho="/provider/proposals">Demandas</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-file-edit' Caminho="/provider/offers-solutions">Ofertas</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-file-import' Caminho="/provider/demands">Demandas</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-file-check' Caminho="/provider/projects">Projetos</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-users' Caminho="/provider/research-group">Grupo Pesquisa</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-comments' Caminho="/provider/conversations">Conversas</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-user'>Perfil</ButtonNavigation>
     </NavigationLeft>

@@ -17,11 +17,9 @@ const StyledHeader = styled.header`
 `
 
 const Header = () => {
-    const { user } = React.useContext(UserContext);
-
     return (
         <StyledHeader>
-            <InfoPerfil NameUserLogged={user.nomeCompleto} OrgOrEnterprise="Sem empresa" FotoPerfil={fotoPerfil}></InfoPerfil>
+            <InfoPerfil FotoPerfil={fotoPerfil}></InfoPerfil>
         </StyledHeader>
     )
 }

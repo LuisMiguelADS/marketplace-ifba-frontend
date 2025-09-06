@@ -45,13 +45,21 @@ const IconLogOut = styled.span`
 `
 
 const InfoPerfil = (props) => {
-    const { userLogout } = React.useContext(UserContext);
+    const { userLogout, user, organizacao, instituicao } = React.useContext(UserContext);
+    let vinculo = '';
+
+    if (organizacao != null) {
+        vinculo = organizacao.nome;
+    } else if (instituicao != null) {
+        vinculo = instituicao.sigla;
+    }
 
     return <Container>
         <FotoPerfil src={props.FotoPerfil} />
         <ContainerInfos>
-            <NameUserLogged>{props.NameUserLogged}</NameUserLogged>
-            <OrgOrEnterprise>{props.OrgOrEnterprise}</OrgOrEnterprise>
+            <NameUserLogged>{user.nomeCompleto}</NameUserLogged>
+            <OrgOrEnterprise>{vinculo ? vinculo : "Sem vinculo"}</OrgOrEnterprise>
+            <OrgOrEnterprise>{user.role}</OrgOrEnterprise>
         </ContainerInfos>
         <IconLogOut className='pi pi-sign-out' onClick={userLogout} />
     </Container>

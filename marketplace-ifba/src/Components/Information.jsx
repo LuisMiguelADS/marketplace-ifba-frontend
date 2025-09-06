@@ -42,6 +42,7 @@ const NoImage = styled.div`
     font-size: 2rem;
 `
 
+
 const Information = ({ Title, Informations, Tags, WithBackground }) => {
     return <Container style={{ backgroundColor: (WithBackground === 'true') ? '#e3f4e3' : '', padding: (WithBackground === 'false') ? '0px 0px 20px 0px' : '', borderBottom: (WithBackground === 'false') ? '2px solid #018d1b85' : '', borderRadius: (WithBackground === 'false') ? '0px' : '' }}>
         <h2>{Title}</h2>
@@ -55,7 +56,8 @@ const Information = ({ Title, Informations, Tags, WithBackground }) => {
                             {info.members.map((member) => (
                                 <ContainerImage key={member.name}>
                                     {(member.img_perfil) ? (<Image src={member.img_perfil} alt={member.name} />) : (<NoImage className='pi pi-user' />)}
-                                    <p>{member.name}</p>
+                                    <p>{member.role}</p>
+                                    <p>{member.nomeCompleto}</p>
                                 </ContainerImage>
                             ))}
                         </ContainerMembers>

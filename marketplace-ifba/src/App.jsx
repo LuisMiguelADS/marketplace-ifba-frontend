@@ -10,7 +10,7 @@ import Home from './Pages/Home';
 import NavigationRequester from './Components/Navigation/NavigationRequester';
 import OverviewRequester from './Pages/requester/OverviewRequester';
 import DemandsRequester from './Pages/requester/DemandsRequester';
-import ProposalsRequester from './Pages/requester/ProposalsRequester';
+import OffersSolutionRequester from './Pages/requester/OffersSolutionRequester';
 import ProjectsRequester from './Pages/requester/ProjectsRequester';
 import GroupResearchRequester from './Pages/requester/GroupResearchRequester';
 import ConversationsRequester from './Pages/requester/ConversationsRequester';
@@ -19,16 +19,16 @@ import JoinOrganization from './Pages/requester/JoinOrganization';
 // Demandados
 import NavigationProvider from './Components/Navigation/NavigationProvider';
 import OverviewProvider from './Pages/provider/OverviewProvider';
+import OfferSolutionProvider from './Pages/provider/OfferSolutionProvider';
 import DemandsProvider from './Pages/provider/DemandsProvider';
-import ProposalsProvider from './Pages/provider/ProposalsProvider';
 import ProjectsProvider from './Pages/provider/ProjectsProvider';
-import GroupResearchProvider from './Pages/provider/GroupResearchProvider';
 import ConversationsProvider from './Pages/provider/ConversationsProvider';
 
 import NotFound from './Pages/NotFound';
 import { UserStorage } from './Components/UserContext';
 import ProtectedRouter from './Components/ProtectedRouter';
 import Register from './Pages/Register';
+import JoinGroupResearch from './Pages/provider/JoinGroupResearch';
 
 function App() {
   return <div className='grid-container'>
@@ -39,7 +39,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
 
-          <Route element={<ProtectedRouter allowedRoles={['ADMIN']} />}>
+          <Route element={<ProtectedRouter allowedRoles={['ADMIN', 'EXTERNO']} />}>
             <Route path="/requester" element={
               <>
                 <NavigationRequester />
@@ -50,14 +50,16 @@ function App() {
               {/* Rotas dos demandantes/solicitantes */}
               <Route path="overview" element={<OverviewRequester />} />
               <Route path="demands" element={<DemandsRequester />} />
-              <Route path="proposals" element={<ProposalsRequester />} />
+              <Route path="offers" element={<OffersSolutionRequester />} />
               <Route path="projects" element={<ProjectsRequester />} />
               <Route path="research-group" element={<GroupResearchRequester />} />
               <Route path="conversations" element={<ConversationsRequester />} />
               <Route path="organization" element={<JoinOrganization />} />
               <Route path="*" element={<NotFound />} />
             </Route>
+          </Route>
 
+          <Route element={<ProtectedRouter allowedRoles={['ADMIN', 'PROFESSOR', 'ALUNO']} />}>
             <Route path="/provider" element={
               <>
                 <NavigationProvider />
@@ -68,10 +70,10 @@ function App() {
 
               {/* Rotas dos demandados/solicitados */}
               <Route path="overview" element={<OverviewProvider />} />
+              <Route path="offers-solutions" element={<OfferSolutionProvider />} />
               <Route path="demands" element={<DemandsProvider />} />
-              <Route path="proposals" element={<ProposalsProvider />} />
               <Route path="projects" element={<ProjectsProvider />} />
-              <Route path="research-group" element={<GroupResearchProvider />} />
+              <Route path="research-group" element={<JoinGroupResearch />} />
               <Route path="conversations" element={<ConversationsProvider />} />
               <Route path="*" element={<NotFound />} />
             </Route>
@@ -83,7 +85,7 @@ function App() {
         </Routes>
       </UserStorage>
     </BrowserRouter>
-  </div>
+  </div >
 }
 
 export default App;

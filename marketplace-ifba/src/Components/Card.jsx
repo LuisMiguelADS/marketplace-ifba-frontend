@@ -8,11 +8,12 @@ const Container = styled.div`
     gap: 10px;
     min-width: 300px;  
     max-width: 300px;
-    min-height: 200px;
+    min-height: 220px;
     position: relative;
     border-radius: var(--standard-border);
     box-shadow: 0 4px 4px 0px #00000046;
     cursor: pointer;
+    background-color: white;
 
     &:hover {
         transform: translateY(-15px);
@@ -139,7 +140,7 @@ const Card = (props) => {
         <Container style={{
             ...(props.Statistics || props.ButtonNewIdea) && { height: '100px' },
             ...(props.ButtonViewDetails || props.ButtonOpenConversation) && { paddingBottom: '100px' }
-        }} onClick={(props.onClick) && props.onClick}>
+        }} onClick={!props.ButtonNewIdea && props.onClick ? props.onClick : undefined}>
             <ContainerIcon>
                 <Icon className={props.IconContainer} alt="Icon" />
             </ContainerIcon>
@@ -187,7 +188,7 @@ const Card = (props) => {
                     Abrir Conversa
                 </ButtonCard>}
             {props.ButtonNewIdea &&
-                <ButtonNewIdea>
+                <ButtonNewIdea onClick={props.onClick}>
                     <Icon className='pi pi-plus' alt="Icon" />
                     Criar Demanda
                 </ButtonNewIdea>}

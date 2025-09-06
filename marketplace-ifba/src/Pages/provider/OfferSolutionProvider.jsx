@@ -1,25 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import Card from '../../Components/Card';
 import ContainerMainContent from '../../Components/ContainerMainContent';
 import ListInformations from '../../Components/ListInformations';
 import Modal from '../../Components/Modal';
-import Card from '../../Components/Card';
-import useFetch from '../../Hooks/useFetch';
 import { UserContext } from '../../Components/UserContext';
-import { LISTAR_OFERTAS_VIA_GRUPO_PESQUISA_GET } from '../../api/ofertaSolucao';
-import { TODOS_PROJETOS_GET } from '../../api/projeto';
+import useFetch from '../../Hooks/useFetch';
+import { LISTAR_OFERTAS_VIA_GRUPO_PESQUISA_GET, APROVAR_REPROVAR_OFERTA_SOLUCAO_POST } from '../../api/ofertaSolucao';
 import { getStatusColor } from '../../utils/statusColors';
 import ContainerCards from '../../Components/ContainerCards';
 import TextoAviso from '../../Components/TextoAviso';
 
-const OverviewProvider = () => {
+const OfferSolutionProvider = () => {
     const [modal, setModal] = React.useState(false);
-    const { request, loading } = useFetch();
     const [ofertas, setOfertas] = React.useState();
-    const [projetos, setProjetos] = React.useState([]);
+    const { grupoPesquisa, user, hasRole } = React.useContext(UserContext);
+    const { request, loading } = useFetch();
     const [selectedOferta, setSelectedOferta] = React.useState(null);
-    const [selectedProject, setSelectedProject] = React.useState(null);
-    const { grupoPesquisa, organizacao } = React.useContext(UserContext);
 
     React.useEffect(() => {
         async function fetchData() {
@@ -29,30 +26,13 @@ const OverviewProvider = () => {
             const { response, json } = await request(url, options);
             if (response.ok) {
                 setOfertas(json);
-                console.log('[OVERVIEWREQUESTER]: Sucesso na busca por ofertas');
+                console.log('[OFFERSOLUTIONPROVIDER]: Sucesso na busca por ofertas solução do grupo de pesquisa');
             } else {
-                console.log('[OVERVIEWREQUESTER]: Falha na busca por ofertas');
+                console.log('[OFFERSOLUTIONPROVIDER]: Falha na busca por ofertas solução do grupo de pesquisa');
             }
         }
         fetchData();
     }, [grupoPesquisa]);
-
-    React.useEffect(() => {
-        async function fetchProjetos() {
-            const token = window.localStorage.getItem('token_autenticacao');
-            if (token) {
-                const { url, options } = TODOS_PROJETOS_GET(token);
-                const { response, json } = await request(url, options);
-                if (response.ok) {
-                    setProjetos(json);
-                    console.log('[OVERVIEWPROVIDER]: Sucesso na busca por projetos');
-                } else {
-                    console.log('[OVERVIEWPROVIDER]: Falha na busca por projetos');
-                }
-            }
-        }
-        fetchProjetos();
-    }, [request]);
 
     function handleClickModal(oferta) {
         setSelectedOferta(oferta);
@@ -60,93 +40,54 @@ const OverviewProvider = () => {
         console.log(oferta);
     }
 
-    function handleClickProjectModal(project) {
-        setSelectedProject(project);
-        console.log(project);
+    async function handleApprovalDecision(idOfertaSolucao, decisao) {
+        const token = window.localStorage.getItem('token_autenticacao');
+        const { url, options } = APROVAR_REPROVAR_OFERTA_SOLUCAO_POST({ idOfertaSolucao, decisao }, token);
+        const { response } = await request(url, options);
+        if (response.ok) {
+            alert(`Oferta ${decisao ? 'aprovada' : 'reprovada'} com sucesso!`);
+            const updatedOfertas = ofertas.map(oferta => 
+                oferta.idOfertaSolucao === idOfertaSolucao 
+                    ? { ...oferta, status: decisao ? 'APROVADO' : 'NAO_APROVADO' }
+                    : oferta
+            );
+            setOfertas(updatedOfertas);
+            setModal(false);
+        } else {
+            console.log('[OFFERSOLUTIONPROVIDER]: Falha na aprovação/reprovação da oferta');
+            alert('Erro ao processar a decisão. Tente novamente.');
+        }
     }
 
-    const formatDate = (dateString) => {
-        if (!dateString) return 'Não definido';
-        const date = new Date(dateString);
-        return date.toLocaleDateString('pt-BR');
-    };
+    function handleApprove() {
+        if (selectedOferta) {
+            handleApprovalDecision(selectedOferta.idSolucao, true);
+        }
+    }
 
-    const createProjectInformations = (projeto) => {
-        if (!projeto) return [];
+    function handleReject() {
+        if (selectedOferta) {
+            handleApprovalDecision(selectedOferta.idSolucao, false);
+        }
+    }
 
-        const informationsGeneral = {
-            title: 'Informações Gerais',
-            infos: [
-                {
-                    subTitle: 'Organização Solicitante',
-                    description: organizacao?.nome || 'Não definido'
-                },
-                {
-                    subTitle: 'Grupo Pesquisa Responsável',
-                    description: projeto.grupoPesquisa?.nome || 'Não definido'
-                },
-                {
-                    subTitle: 'Instituição Responsável',
-                    description: projeto.instituicao?.nome || 'Não definido'
-                }
-            ]
+    const getButtonsConfig = () => {
+        if (!selectedOferta || !hasRole('PROFESSOR') || selectedOferta.status !== 'AGUARDANDO_APROVACAO') {
+            return {};
+        }
+        
+        return {
+            ButtonConfirm: true,
+            ButtonRecused: true,
+            onButtonConfirmClick: handleApprove,
+            onButtonRecusedClick: handleReject
         };
-
-        const aboutProject = {
-            title: 'Sobre a Proposta',
-            infos: [
-                {
-                    subTitle: 'Descrição',
-                    description: projeto.demanda?.descricao || 'Sem descrição disponível'
-                },
-                {
-                    subTitle: 'Resumo',
-                    description: projeto.demanda?.resumo || 'Sem resumo disponível'
-                },
-                {
-                    subTitle: 'Orçamento',
-                    description: projeto.demanda?.orcamento ? `R$ ${projeto.demanda?.orcamento.toLocaleString('pt-BR')}` : 'Não definido'
-                }
-            ]
-        };
-
-        const timeline = {
-            title: 'Cronograma',
-            infos: [
-                {
-                    subTitle: 'Iniciado',
-                    description: formatDate(projeto.dataInicio)
-                },
-                {
-                    subTitle: 'Prazo',
-                    description: formatDate(projeto.demanda?.dataPrazoFinal)
-                },
-                {
-                    subTitle: 'Finalizado',
-                    description: formatDate(projeto.dataFim)
-                }
-            ]
-        };
-
-        const state = {
-            title: 'Estado',
-            infos: [
-                {
-                    subTitle: 'Status',
-                    description: projeto.status
-                },
-                {
-                    subTitle: 'Entregas',
-                    description: projeto.entregas?.length?.toString() || '0'
-                }
-            ]
-        };
-
-        return [informationsGeneral, aboutProject, timeline, state];
     };
 
     return <ContainerMainContent>
         <h1>Ofertas Abertas</h1>
+        <p style={{ margin: '-20px 0px', fontSize: '16px' }}>Selecione uma oferta para ver mais informações</p>
+
         <ContainerCards>
             {loading ? (<p>Carregando...</p>) : (null)}
             {ofertas && ofertas.length > 0 ? (ofertas.map((oferta, index) => {
@@ -169,37 +110,7 @@ const OverviewProvider = () => {
                 <TextoAviso>Nenhum oferta encontrada</TextoAviso>
             )}
         </ContainerCards>
-        <h1>Projetos Ativos</h1>
-        <ContainerCards>
-            {loading ? (<p>Carregando...</p>) : (null)}
-            {projetos && projetos.length > 0 ? (projetos.map((projeto, index) => {
-                return (
-                    <Card
-                        key={projeto.idProjeto || index}
-                        IconContainer="pi pi-file-check"
-                        Title={projeto.nome}
-                        Infos={[
-                            `Instituição: ${projeto.instituicao?.nome || 'Não definido'}`,
-                            `Início: ${formatDate(projeto.dataInicio)}`,
-                            `Previsão: ${formatDate(projeto.dataPrazoFinal)}`
-                        ]}
-                        Status={projeto.status}
-                        ColorStatus="green"
-                        onClick={() => handleClickProjectModal(projeto)}
-                    />
-                );
-            })) : (
-                <TextoAviso>Nenhum projeto encontrado</TextoAviso>
-            )}
-        </ContainerCards>
-        <h1>Dashboard</h1>
-        <ContainerCards>
-            <Card IconContainer="pi pi-file-check" Title="Projetos Ativos" Statistics={projetos ? projetos.length.toString().padStart(2, '0') : '00'} />
-            <Card IconContainer="pi pi-file-import" Title="Ofertas" Statistics={ofertas ? ofertas.length.toString().padStart(2, '0') : '00'} />
-            <Card IconContainer="pi pi-check" Title="Taxa Sucesso" Statistics="89%" />
-            <Card IconContainer="pi pi-sun" Title="Nova ideia?" ButtonNewIdea="yes" />
-        </ContainerCards>
-        <Modal SetModal={setModal} View={modal}>
+        <Modal SetModal={setModal} View={modal} {...getButtonsConfig()}>
             <ListInformations
                 Title={selectedOferta && selectedOferta.nome}
                 Informations={[
@@ -291,14 +202,7 @@ const OverviewProvider = () => {
                 editStyle={{ maxHeight: '700px', minWidth: '1000px' }}
                 modal />
         </Modal>
-        <Modal SetModal={() => setSelectedProject(null)} View={!!selectedProject}>
-             <ListInformations
-                 Title={selectedProject && selectedProject.nome}
-                 Informations={createProjectInformations(selectedProject)}
-                 editStyle={{ maxHeight: '700px', minWidth: '1000px' }}
-                 modal />
-         </Modal>
     </ContainerMainContent>
 }
 
-export default OverviewProvider;
+export default OfferSolutionProvider;

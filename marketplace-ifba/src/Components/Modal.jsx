@@ -73,13 +73,16 @@ const Modal = (props) => {
         <ContainerCancelPropagClick onClick={handleContentClick}>
             <DivEffect >{props.children}</DivEffect>
         </ContainerCancelPropagClick>
-        {(props.ButtonEdit || props.ButtonRecused || props.ButtonConfirm || props.ButtonCreate || props.ButtonCanceled) && (
+        {(props.ButtonEdit || props.ButtonRecused || props.ButtonConfirm || props.ButtonCreate || props.ButtonCanceled || props.ButtonOffer || props.ButtonApprove || props.ButtonDeliver) && (
             <ContainerButtons>
-                {props.ButtonEdit && <Button Edited>Editar</Button>}
-                {props.ButtonRecused && <Button Recused>Excluir</Button>}
-                {props.ButtonCanceled && <Button Recused>Cancelar</Button>}
-                {props.ButtonConfirm && <Button>Aceitar</Button>}
-                {props.ButtonCreate && <Button>Criar</Button>}
+                {props.ButtonEdit && <Button Edited onClick={props.onButtonEditClick}>Editar</Button>}
+                {props.ButtonRecused && <Button Recused onClick={props.onButtonRecusedClick}>Excluir</Button>}
+                {props.ButtonCanceled && <Button Recused onClick={props.onButtonCanceledClick}>Cancelar</Button>}
+                {props.ButtonConfirm && <Button onClick={props.onButtonConfirmClick}>Aceitar</Button>}
+                {props.ButtonCreate && <Button onClick={props.onButtonCreateClick}>Criar</Button>}
+                {props.ButtonOffer && <Button Edited onClick={props.onButtonOfferClick}>Enviar Oferta</Button>}
+                {props.ButtonApprove && <Button onClick={props.onButtonApproveClick}>Aprovar</Button>}
+                {props.ButtonDeliver && <Button onClick={props.onButtonDeliverClick}>Entregar</Button>}
             </ContainerButtons>)}
     </StyledModal>
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { UserContext } from './UserContext';
+import NotPermission from '../Pages/NotPermission';
 
 const ProtectedRouter = ({ allowedRoles }) => {
     const { login, hasRole, loadingAutoLogin, awaitUserContext } = React.useContext(UserContext);
@@ -17,6 +18,8 @@ const ProtectedRouter = ({ allowedRoles }) => {
         } else if (hasRole(allowedRoles)) {
             console.log("[PROTECTEDROUTER]: Login automático realizado");
             return <Outlet />;
+        } else {
+            return <NotPermission />
         }
     }
 

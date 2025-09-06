@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import useForm from '../Hooks/useForm';
+import useFetch from '../Hooks/useFetch';
 import Input from './Forms/Input';
+import { UserContext } from './UserContext';
+import { ENVIAR_MENSAGEM_POST } from '../api/chat';
 
 const Container = styled.div`
     min-width: 400px;
@@ -122,23 +125,52 @@ const SendButton = styled.button`
 
 const Chat = (props) => {
     const contentMessage = useForm();
+    const { user } = React.useContext(UserContext);
+    const { request, loading } = useFetch();
+    const [sending, setSending] = React.useState(false);
+
+    async function handleSendMessage(event) {
+        event.preventDefault();
+        
+        if (!contentMessage.value.trim() || !props.ChatId || !user) {
+            return;
+        }
+
+        setSending(true);
+        const token = window.localStorage.getItem('token_autenticacao');
+        
+        const messageBody = {
+            idChat: props.ChatId,
+            idUsuario: user.idUsuario,
+            mensagem: contentMessage.value.trim()
+        };
+
+        try {
+            const { url, options } = ENVIAR_MENSAGEM_POST(messageBody, token);
+            const { response, json } = await request(url, options);
+            
+            if (response && response.ok) {
+                console.log('[CHAT]: Mensagem enviada com sucesso');
+                contentMessage.setValue('');
+                if (props.onMessageSent) {
+                    props.onMessageSent();
+                }
+            } else {
+                console.log('[CHAT]: Falha ao enviar mensagem');
+            }
+        } catch (error) {
+            console.error('[CHAT]: Erro ao enviar mensagem:', error);
+        } finally {
+            setSending(false);
+        }
+    }
 
     return <Container>
         <h1 style={{ paddingLeft: '30px' }}>{props.Title}</h1>
         <Messages>
             {props.Messages && props.Messages.map((msg, index) => {
                 return <div key={index}>
-                    {(msg.user.name === 'Integrante 1') ?
-                        <Message>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                                <ContainerImage>
-                                    {(msg.user.img_perfil) ? (<Image src={msg.user.img_perfil} alt={msg.user.name} />) : (<NoImage className='pi pi-user' />)}
-                                </ContainerImage>
-                                <h3>{msg.user.name}</h3>
-                            </div>
-                            <ContentMessage>{msg.message}</ContentMessage>
-                            <p style={{ marginLeft: '70px' }}>{msg.dateTime}</p>
-                        </Message> :
+                    {(msg.user.name === props.Nome) ?
                         <Message style={{ alignItems: 'end' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                                 <h3>Você</h3>
@@ -148,14 +180,24 @@ const Chat = (props) => {
                             </div>
                             <ContentMessage style={{ marginRight: '70px', backgroundColor: '#77FF90' }}>{msg.message}</ContentMessage>
                             <p style={{ marginRight: '70px' }}>{msg.dateTime}</p>
+                        </Message> :
+                        <Message>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                                <ContainerImage>
+                                    {(msg.user.img_perfil) ? (<Image src={msg.user.img_perfil} alt={msg.user.name} />) : (<NoImage className='pi pi-user' />)}
+                                </ContainerImage>
+                                <h3>{msg.user.name}</h3>
+                            </div>
+                            <ContentMessage>{msg.message}</ContentMessage>
+                            <p style={{ marginLeft: '70px' }}>{msg.dateTime}</p>
                         </Message>
                     }
                 </div>
             })}
         </Messages>
-        <SendMessage>
+        <SendMessage onSubmit={handleSendMessage}>
             <Input editStyle={{ width: '870px', marginTop: '-1px' }} type="textarea" name="message" {...contentMessage} placeholder="Escreva..." />
-            <SendButton className='pi pi-send' />
+            <SendButton type="submit" className='pi pi-send' disabled={sending || !contentMessage.value.trim()} />
         </SendMessage>
     </Container>
 }

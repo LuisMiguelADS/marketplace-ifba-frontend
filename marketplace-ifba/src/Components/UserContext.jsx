@@ -1,5 +1,8 @@
 import React from 'react';
-import { LOGIN_POST, USER_VIA_TOKEN_GET, ORGANIZACAO_ID_GET } from './api';
+import { LOGIN_POST, USER_VIA_TOKEN_GET } from '../api/usuario';
+import { ORGANIZACAO_ID_GET } from '../api/organizacao';
+import { GRUPO_PESQUISA_ID_GET } from '../api/grupoPesquisa';
+import { INSTITUICAO_ID_GET } from '../api/instituicao';
 import useFetch from '../Hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,6 +17,8 @@ export const UserStorage = ({ children }) => {
     const navigate = useNavigate();
     const [awaitUserContext, setAwaitUserContext] = React.useState(false);
     const [organizacao, setOrganizacao] = React.useState(null);
+    const [grupoPesquisa, setGrupoPesquisa] = React.useState(null);
+    const [instituicao, setInstituicao] = React.useState(null);
 
     async function getUserData(token) {
         try {
@@ -54,7 +59,11 @@ export const UserStorage = ({ children }) => {
             window.localStorage.setItem('token_autenticacao', json.token);
             setUser(json.user);
             setLogin(true);
-            navigate('requester/overview');
+            if (json.user.role == 'PROFESSOR' || json.user.role == 'ALUNO' || json.user.role == 'ADMIN') {
+                navigate('provider/overview');
+            } else if (json.user.role == 'EXTERNO') {
+                navigate('requester/overview');
+            }
             console.log('[USERCONTEXT] Logando');
         } else {
             console.log('[USERCONTEXT] Falha no Login');
@@ -68,6 +77,9 @@ export const UserStorage = ({ children }) => {
         setLoading(false);
         setLogin(false);
         setUser(null);
+        setOrganizacao(null);
+        setGrupoPesquisa(null);
+        setInstituicao(null);
         window.localStorage.removeItem('token_autenticacao');
         navigate('/login');
         console.log('[USERCONTEXT] Deslogando');
@@ -102,10 +114,51 @@ export const UserStorage = ({ children }) => {
             }
         }
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
+
+    React.useEffect(() => {
+        async function fetchData() {
+            if (user !== null && user.idGrupoPesquisa !== null) {
+                const token = window.localStorage.getItem('token_autenticacao');
+                const { url, options } = GRUPO_PESQUISA_ID_GET(user.idGrupoPesquisa, token);
+                const { response, json } = await request(url, options);
+                if (response.ok) {
+                    setGrupoPesquisa(json);
+                    console.log('[USERCONTEXT]: Busca do grupo pesquisa via ID realizada com sucesso');
+                } else {
+                    console.log('[USERCONTEXT]: Falha na busca do grupo pesquisa via ID');
+                }
+            } else {
+                console.log('[USERCONTEXT]: Usuário não tem grupo pesquisa ainda');
+            }
+        }
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
+
+    React.useEffect(() => {
+        async function fetchData() {
+            if (user !== null && user.idInstituicao !== null) {
+                const token = window.localStorage.getItem('token_autenticacao');
+                const { url, options } = INSTITUICAO_ID_GET(user.idInstituicao, token);
+                const { response, json } = await request(url, options);
+                if (response.ok) {
+                    setInstituicao(json);
+                    console.log('[USERCONTEXT]: Busca da instituição via ID realizada com sucesso');
+                } else {
+                    console.log('[USERCONTEXT]: Falha na busca da instituição via ID');
+                }
+            } else {
+                console.log('[USERCONTEXT]: Usuário não tem instituição ainda');
+            }
+        }
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     return (
-        <UserContext.Provider value={{ userLogin, data, login, userLogout, error, loadingAutoLogin, hasRole, user, awaitUserContext, organizacao }}>
+        <UserContext.Provider value={{ userLogin, data, login, userLogout, error, loadingAutoLogin, hasRole, user, awaitUserContext, organizacao, setOrganizacao, grupoPesquisa, setGrupoPesquisa, instituicao, setInstituicao }}>
             {children}
         </UserContext.Provider>
     )

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Input from './Forms/Input';
 import useForm from '../Hooks/useForm';
 import Button from './Forms/Button';
-import { REGISTER_POST } from './api';
+import { REGISTER_POST } from '../api/usuario';
 import useFetch from '../Hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 import Select from './Forms/Select';
@@ -49,13 +49,13 @@ const ButtonNavigationSteps = styled.button`
 
 const FormRegister = () => {
     const name = useForm();
-    const role = useForm();
+    const role = useForm(null);
     const email = useForm('email');
     const phone = useForm();
     const password = useForm();
     const passwordConfirm = useForm();
     const cpf = useForm();
-    const dateBirth = useForm();
+    const dateBirth = useForm('dataMaioridade');
     const biography = useForm();
     // const imageProfileURL = useForm();
     // eslint-disable-next-line no-unused-vars
@@ -63,9 +63,11 @@ const FormRegister = () => {
     const navigate = useNavigate();
     const [stepsRegister, setStepRegister] = React.useState(0);
 
+    console.log(role.value)
+
     const getMaxDate = () => {
         const today = new Date();
-        const maxDate = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
+        const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
 
         const year = maxDate.getFullYear();
         const month = String(maxDate.getMonth() + 1).padStart(2, '0');
@@ -108,7 +110,16 @@ const FormRegister = () => {
     }
 
     async function userRegister(nomeCompleto, role, email, telefone, cpf, dataNascimento, biografia, password) {
-        const { url, options } = REGISTER_POST({ nomeCompleto, role, email, telefone, password, cpf, dataNascimento, biografia });
+        let url, options;
+        if (role != 'EXTERNO') {
+            const result = REGISTER_POST({ nomeCompleto, role, email, telefone, password, cpf, dataNascimento, biografia, idInstituicao: '60fa2a3f-466c-43db-88c4-ff4815fbf2aa' });
+            url = result.url;
+            options = result.options;
+        } else {
+            const result = REGISTER_POST({ nomeCompleto, role, email, telefone, password, cpf, dataNascimento, biografia });
+            url = result.url;
+            options = result.options;
+        }
         const { response } = await request(url, options);
         if (response.ok) {
             navigate('/login');
@@ -132,10 +143,9 @@ const FormRegister = () => {
                         definitionMaxWidth="100%"
                     />
                     <Select
-                        options={[{ value: 'ADMIN', label: 'Estudante' }, { value: 'ADMIN', label: 'Professor' }, { value: 'ADMIN', label: 'Organização Externa' }]}
+                        options={[{ value: 'ALUNO', label: 'Estudante' }, { value: 'PROFESSOR', label: 'Professor' }, { value: 'EXTERNO', label: 'Organização Externa' }]}
                         label="Tipo de Usuário"
-                        type="text"
-                        name="role-select"
+                        name="role"
                         {...role}
                         optionTitle="Selecione"
                         definitionMaxWidth="100%"

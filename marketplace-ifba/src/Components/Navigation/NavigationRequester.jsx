@@ -45,7 +45,7 @@ const NavigationRequester = () => {
         </Link>
         <ButtonNavigation Icon='pi pi-chart-pie' Caminho="/requester/overview">Visão Geral</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-file-edit' Caminho="/requester/demands">Demandas</ButtonNavigation>
-        <ButtonNavigation Icon='pi pi-file-import' Caminho="/requester/proposals">Propostas</ButtonNavigation>
+        <ButtonNavigation Icon='pi pi-file-import' Caminho="/requester/offers">Ofertas</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-file-check' Caminho="/requester/projects">Projetos</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-users' Caminho="/requester/research-group">Grupos Pesquisa</ButtonNavigation>
         <ButtonNavigation Icon='pi pi-comments' Caminho="/requester/conversations">Conversas</ButtonNavigation>

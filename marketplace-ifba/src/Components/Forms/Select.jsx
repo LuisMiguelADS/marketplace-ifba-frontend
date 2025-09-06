@@ -26,10 +26,6 @@ const StyledSelect = styled.select`
     }
 `
 
-const Option = styled.option`
-    
-`
-
 const Label = styled.label`
     display: block;
     font-size: 1.3rem;
@@ -39,11 +35,11 @@ const Select = ({ options, label, name, onChange, optionTitle, value, definition
     return <Container style={{ width: definitionMaxWidth }}>
         {label && <Label htmlFor={name}>{label}</Label>}
         <StyledSelect value={value} name={name} id={name} onChange={onChange}>
-            <Option defaultValue='' selected disabled>{optionTitle}</Option>
-            {options.map((option, index) => (
-                <Option key={index} value={option.value}>
-                    {option.label}
-                </Option>
+            <option value='' disabled>{optionTitle}</option>
+            {options.map((op) => (
+                <option key={op.value} value={op.value}>
+                    {op.label}
+                </option>
             ))}
         </StyledSelect>
     </Container>
