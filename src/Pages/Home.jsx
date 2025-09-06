@@ -288,14 +288,14 @@ const WhyChooseUsContainer = styled.section`
     background: #fdfdfd;
     color: black;
     gap: 60px;
-    padding: 60px 20px;
+    padding: 60px 10px;
     
     @media (max-width: 1200px) {
-        padding: 60px 40px;
+        padding: 60px 10px;
     }
     
     @media (max-width: 768px) {
-        padding: 40px 20px;
+        padding: 40px 10px;
     }
 `
 
@@ -305,7 +305,7 @@ const CardsWhyChooseUs = styled.div`
   gap: 30px;
   width: 100%;
   max-width: 1260px;
-  padding: 0 20px;
+  padding: 0 10px;
 
   @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
@@ -816,7 +816,7 @@ function Home() {
       </Hero>
 
       <WhyChooseUsContainer>
-        <h1 style={{ fontSize: '2.5rem' }}>Por que utilizar nossa plataforma?</h1>
+        <h1 style={{ fontSize: '2.5rem', textAlign: 'center' }}>Por que utilizar nossa plataforma?</h1>
         <p style={{ fontSize: '1.1rem', maxWidth: '590px', textAlign: 'center', marginTop: '-40px' }}>Oferecemos as ferramentas e conexões necessárias para transformar desafios em oportunidades de inovação.</p>
         <CardsWhyChooseUs>
           {cardInfos.map((card, index) => {

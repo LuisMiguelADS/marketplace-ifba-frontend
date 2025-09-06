@@ -17,6 +17,11 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     overflow-y: auto;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 20px;
+    }
 `
 
 const ContainerImg = styled.div`
@@ -27,6 +32,10 @@ const ContainerImg = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
 
 const Img = styled.img`
@@ -44,6 +53,15 @@ const ContainerForm = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 60px 0px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        border-radius: 5px;
+        padding: 20px;
+        position: relative;
+    }
 `
 
 const ContainerRegister = styled.div`
@@ -69,6 +87,25 @@ const SpanButtonRegister = styled.div`
     }
 `
 
+const MobileLogo = styled.div`
+    display: none;
+    
+    @media (max-width: 768px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #01420C;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        
+        img {
+            width: 80px;
+            height: 80px;
+        }
+    }
+`
+
 const Register = () => {
     const navigate = useNavigate();
 
@@ -81,6 +118,9 @@ const Register = () => {
             <Img src={logo} alt="Logo IFBA" />
         </ContainerImg>
         <ContainerForm>
+            <MobileLogo>
+                <img src={logo} alt="Logo IFBA" />
+            </MobileLogo>
             <FormRegister />
             <ContainerRegister>
                 <p>Já possui uma conta?</p>
