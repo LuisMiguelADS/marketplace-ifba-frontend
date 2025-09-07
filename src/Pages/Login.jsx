@@ -95,7 +95,7 @@ const MobileLogo = styled.div`
         justify-content: center;
         align-items: center;
         background-color: #01420C;
-        padding: 10px;
+        padding: 20px;
         border-radius: 5px;
         margin-bottom: 20px;
         

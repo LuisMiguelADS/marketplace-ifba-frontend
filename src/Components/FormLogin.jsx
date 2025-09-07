@@ -12,6 +12,11 @@ const Container = styled.form`
     gap: 20px;
     width: 400px;
     padding: 20px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        padding: 0px;
+    }
 `
 const FormLogin = () => {
     const email = useForm('email');

@@ -69,6 +69,7 @@ const ContainerRegister = styled.div`
     flex-direction: row;
     align-items: center;
     gap: 20px;
+    margin-top: 50px;
 `
 
 const SpanButtonRegister = styled.div`
@@ -95,7 +96,7 @@ const MobileLogo = styled.div`
         justify-content: center;
         align-items: center;
         background-color: #01420C;
-        padding: 10px;
+        padding: 20px;
         border-radius: 5px;
         margin-bottom: 20px;
         
