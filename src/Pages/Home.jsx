@@ -66,7 +66,7 @@ const Options = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1050px) {
     display: none;
   }
 `
@@ -75,7 +75,7 @@ const BtnLoginCadastro = styled.div`
   display: flex;
   gap: 1rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1050px) {
     display: none;
   }
 `
@@ -92,7 +92,7 @@ const HamburgerButton = styled.button`
   padding: 0;
   z-index: 1001;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1050px) {
     display: flex;
   }
 
@@ -134,7 +134,7 @@ const MobileMenu = styled.div`
   z-index: 1000;
   padding: 80px 30px 30px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1050px) {
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -154,7 +154,7 @@ const MobileMenuOverlay = styled.div`
   visibility: ${({ $isOpen }) => $isOpen ? 'visible' : 'hidden'};
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1050px) {
     display: block;
   }
 `
@@ -183,6 +183,7 @@ const MobileMenuButtons = styled.div`
 
 const Hero = styled.section`
   background: linear-gradient(to bottom, #004d00, #006400);
+  width: 100%;
   color: white;
   text-align: center;
   padding: 60px 0px;
@@ -194,6 +195,10 @@ const Hero = styled.section`
 
 const Title = styled.h1`
     font-size: 4rem;
+
+    @media (max-width: 768px) {
+      font-size: 48px;
+    }
 `
 
 const SubTitle = styled.p`
@@ -205,6 +210,7 @@ const SubTitle = styled.p`
     @media (max-width: 768px) {
         margin-left: 20px;
         margin-right: 20px;
+        font-size: 20px;
     }
 `;
 
@@ -213,7 +219,7 @@ const ContainerHeroButtons = styled.div`
     gap: 30px;
     align-items: center;
     
-    @media (max-width: 550px) {
+    @media (max-width: 650px) {
         flex-direction: column;
         gap: 20px;
     }
@@ -225,19 +231,13 @@ const HeroButton = styled(Button)`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-around;
     height: 60px;
-    min-width: 200px;
-    width: 200px;
+    width: 220px;
     padding: 0 20px;
     box-shadow: 0 3px 6px #00420c;
     transition: all 0.1s ease;
     position: relative;
-
-    @media (max-width: 768px) {
-        width: 260px;
-        min-width: 220px;
-    }
 
     &:hover {
       background-color: #107421;
@@ -269,7 +269,7 @@ const Data = styled.div`
     
     @media (max-width: 768px) {
         flex-direction: column;
-        gap: 20px;
+        gap: 40px;
         align-items: center;
     }
 `
@@ -279,6 +279,7 @@ const DataItem = styled.div`
     flex-direction: column;
     align-items: center;
     font-size: 1.4rem;
+    gap: 10px;
 `
 
 const WhyChooseUsContainer = styled.section`
@@ -321,8 +322,12 @@ const CardWhyChooseUs = styled.div`
     border-radius: 5px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.378);
     transition: all 0.3s ease;
-    height: 200px;
-    position: relative;            
+    min-height: 200px;
+    position: relative;
+    
+    @media (max-width: 768px) {
+      min-height: 160px;
+    }
 `
 
 const LineDesignCard = styled.div`
@@ -338,12 +343,17 @@ const InfosCardWhyChooseUs = styled.div`
     gap: 20px;
     flex-direction: column;
     margin-top: 40px;
+
+    @media (max-width: 768px) {
+      margin-top: 20px;
+      gap: 10px;
+    }
 `
 
 const ConnectionContainer = styled.section`
   background: linear-gradient(to bottom right, #004d00, #006400);
   color: #ffffff;
-  padding: 5rem 2rem;
+  padding: 80px 32px;
   text-align: center;
   position: relative;
   display: flex;
@@ -352,11 +362,11 @@ const ConnectionContainer = styled.section`
   gap: 40px;
   
   @media (max-width: 1200px) {
-    padding: 5rem 3rem;
+    padding: 80px 20px;
   }
   
   @media (max-width: 768px) {
-    padding: 3rem 2rem;
+    padding: 48px 20px;
   }
 `
 const ConnectionButton = styled(Button)`
@@ -449,7 +459,7 @@ const ArrowContainer = styled.div`
         display: none;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
         flex-direction: row;
         gap: 10px;
         
@@ -575,6 +585,15 @@ const StepBadge = styled.p`
     color: white;
     white-space: nowrap;
     margin: 0;
+`
+
+const StepDescription = styled.p`
+    margin: 10px 0;
+    text-align: justify;
+
+    @media (max-width: 480px) {
+      margin-left: -60px;
+    }
 `
 
 const Footer = styled.footer`
@@ -867,7 +886,7 @@ function Home() {
                         <StepBadge>Passo {step.passo}</StepBadge>
                         <h3>{step.title}</h3>
                       </StepHeader>
-                      <p style={{ margin: '10px 0', textAlign: 'justify' }}>{step.description}</p>
+                      <StepDescription>{step.description}</StepDescription>
                     </StepContent>
                   </StepCard>
                 )
@@ -887,7 +906,7 @@ function Home() {
                         <StepBadge>Passo {step.passo}</StepBadge>
                         <h3>{step.title}</h3>
                       </StepHeader>
-                      <p>{step.description}</p>
+                      <StepDescription>{step.description}</StepDescription>
                     </StepContent>
                   </StepCard>
                 )
