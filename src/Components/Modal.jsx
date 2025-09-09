@@ -4,7 +4,7 @@ import Button from './Forms/Button';
 import ButtonClosedModel from './ButtonClosedModel';
 
 const StyledModal = styled.div`
-    height: 100%;
+    height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.665);
     position: absolute;
@@ -19,7 +19,7 @@ const StyledModal = styled.div`
     padding: 0px 20px;
 
     @media (max-width: 600px) {
-        padding: 50px 10px 20px;
+        padding: 100px 10px 20px;
     }
 `
 
