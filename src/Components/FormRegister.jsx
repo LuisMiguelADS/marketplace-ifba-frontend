@@ -117,7 +117,7 @@ const FormRegister = () => {
     async function userRegister(nomeCompleto, role, email, telefone, cpf, dataNascimento, biografia, password) {
         let url, options;
         if (role != 'EXTERNO') {
-            const result = REGISTER_POST({ nomeCompleto, role, email, telefone, password, cpf, dataNascimento, biografia, idInstituicao: '60fa2a3f-466c-43db-88c4-ff4815fbf2aa' });
+            const result = REGISTER_POST({ nomeCompleto, role, email, telefone, password, cpf, dataNascimento, biografia, idInstituicao: '614e64ba-349a-40f3-a37a-2333449caf01' });
             url = result.url;
             options = result.options;
         } else {
