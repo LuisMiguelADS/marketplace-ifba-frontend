@@ -1,4 +1,4 @@
-export const API_URL = 'http://3.87.102.125:8080';
+export const API_URL = '/api';
 
 export function GRUPO_PESQUISA_ID_GET(id, token) {
     return {
