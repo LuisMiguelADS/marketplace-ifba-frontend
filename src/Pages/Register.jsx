@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
     background-color: #018e1b;
-    height: 100%;
+    height: 100vh;
     width: 100vw;
     position: absolute;
     top: 0;

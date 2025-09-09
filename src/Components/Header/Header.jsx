@@ -11,15 +11,48 @@ const StyledHeader = styled.header`
     position: fixed;
     z-index: 9;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     color: black;
+    padding: 0 20px;
 `
 
-const Header = () => {
+const MenuButton = styled.button`
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: black;
+    cursor: pointer;
+    padding: 10px;
+    
+    @media (max-width: 1000px) {
+        display: block;
+    }
+    
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+    }
+`
+
+const HeaderContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+`
+
+const Header = ({ onMenuToggle }) => {
     return (
         <StyledHeader>
-            <InfoPerfil FotoPerfil={fotoPerfil}></InfoPerfil>
+            <MenuButton onClick={onMenuToggle}>
+                <i className="pi pi-bars"></i>
+            </MenuButton>
+            <HeaderContent>
+                <InfoPerfil FotoPerfil={fotoPerfil}></InfoPerfil>
+            </HeaderContent>
         </StyledHeader>
     )
 }

@@ -11,6 +11,11 @@ const Container = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
 
+    @media (max-width: 1000px) {
+        grid-column: 1;
+        padding: 20px;
+    }
+
     &::-webkit-scrollbar {
         width: 20px;
         background-color: #01420c;

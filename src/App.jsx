@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import Header from './Components/Header/Header';
@@ -31,6 +31,12 @@ import Register from './Pages/Register';
 import JoinGroupResearch from './Pages/provider/JoinGroupResearch';
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return <div className='grid-container'>
     <BrowserRouter>
       <UserStorage>
@@ -43,8 +49,8 @@ function App() {
           <Route element={<ProtectedRouter allowedRoles={['ADMIN', 'EXTERNO']} />}>
             <Route path="/requester" element={
               <>
-                <NavigationRequester />
-                <Header />
+                <NavigationRequester isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+                <Header onMenuToggle={handleMenuToggle} />
                 <Outlet />
               </>
             }>
@@ -63,8 +69,8 @@ function App() {
           <Route element={<ProtectedRouter allowedRoles={['ADMIN', 'PROFESSOR', 'ALUNO']} />}>
             <Route path="/provider" element={
               <>
-                <NavigationProvider />
-                <Header />
+                <NavigationProvider isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+                <Header onMenuToggle={handleMenuToggle} />
                 <Outlet />
               </>
             }>
