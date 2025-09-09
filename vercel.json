@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "http://3.87.102.125:8080/(.*)"
+      "destination": "https://marketplace-ifba.duckdns.org/$1"
     }
   ]
 }
