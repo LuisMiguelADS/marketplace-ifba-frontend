@@ -288,14 +288,14 @@ const OverviewProvider = () => {
                         ]
                     }
                 ]}
-                editStyle={{ maxHeight: '700px', minWidth: '1000px' }}
+                editStyle={{ maxHeight: '700px' }}
                 modal />
         </Modal>
         <Modal SetModal={() => setSelectedProject(null)} View={!!selectedProject}>
              <ListInformations
                  Title={selectedProject && selectedProject.nome}
                  Informations={createProjectInformations(selectedProject)}
-                 editStyle={{ maxHeight: '700px', minWidth: '1000px' }}
+                 editStyle={{ maxHeight: '700px' }}
                  modal />
          </Modal>
     </ContainerMainContent>

@@ -415,7 +415,7 @@ const DemandsProvider = () => {
             <ListInformations 
                 Title={selectedDemanda?.nome || 'Detalhes da Demanda'} 
                 Informations={getModalInformations()} 
-                editStyle={{ maxHeight: '700px', minWidth: '1000px' }} 
+                editStyle={{ maxHeight: '700px' }} 
                 modal 
             />
         </Modal>
