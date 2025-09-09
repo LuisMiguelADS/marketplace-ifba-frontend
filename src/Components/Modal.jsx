@@ -19,7 +19,7 @@ const StyledModal = styled.div`
     padding: 0px 20px;
 
     @media (max-width: 600px) {
-        padding: 0px 10px;
+        padding: 50px 10px 20px;
     }
 `
 
