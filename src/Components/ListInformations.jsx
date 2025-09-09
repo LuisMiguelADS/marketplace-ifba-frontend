@@ -4,8 +4,7 @@ import Information from './Information';
 import Button from './Forms/Button';
 
 const Container = styled.div`
-    min-width: 340px;
-    max-width: 1000px;
+    width: 1000px;
     position: relative;
     background-color: white;
     padding: 30px;
@@ -22,16 +21,29 @@ const Container = styled.div`
         overflow-y: auto;
         overflow-x: hidden;
 
-        &::-webkit-scrollbar {
-            width: 20px;
-            background-color: #01420c;
+        @media (min-width: 1001px) {
+            &::-webkit-scrollbar {
+                width: 20px;
+                background-color: #01420c;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                height: 60px;
+                background-color: #018e1b;
+                border-radius: 5px;
+                border: 2px solid #00420C;
+            }
         }
 
-        &::-webkit-scrollbar-thumb {
-            height: 60px;
-            background-color: #018e1b;
-            border-radius: 5px;
-            border: 2px solid #00420C;
+        @media (max-width: 1040px) {
+            overflow-y: visible;
+            max-width: calc(100vw - 40px);
+            min-width: 340px;
+        }
+
+        @media (max-width: 600px) {
+            max-width: calc(100vw - 20px);
+            padding: 20px 10px;
         }
     `}
 `

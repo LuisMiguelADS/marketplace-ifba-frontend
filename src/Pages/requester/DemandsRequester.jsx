@@ -226,7 +226,7 @@ const DemandsRequester = () => {
                         ]
                     }
                 ]}
-                editStyle={{ maxHeight: '700px', minWidth: '1000px' }}
+                editStyle={{ maxHeight: '700px' }}
                 modal
             />
         </Modal>

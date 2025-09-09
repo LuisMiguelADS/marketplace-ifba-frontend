@@ -43,6 +43,10 @@ const Form = styled.form`
             overflow-y: visible;
             max-width: calc(100vw - 60px);
         }
+
+        @media (max-width: 600px) {
+            padding: 20px 10px;
+        }
     `}
 `
 

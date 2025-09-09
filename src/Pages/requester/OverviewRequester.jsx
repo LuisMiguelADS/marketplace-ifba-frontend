@@ -20,13 +20,13 @@ const OverviewRequester = () => {
     const [projetos, setProjetos] = React.useState([]);
     const [selectedDemand, setSelectedDemand] = React.useState(null);
     const [selectedProject, setSelectedProject] = React.useState(null);
-    const { organizacao } = React.useContext(UserContext);
+    const { user, organizacao } = React.useContext(UserContext);
     const navigate = useNavigate();
 
     React.useEffect(() => {
         async function fetchData() {
             const token = window.localStorage.getItem('token_autenticacao');
-            const idOrganizacao = organizacao && organizacao.idOrganizacao;
+            const idOrganizacao = user && user.idOrganizacao;
             const { url, options } = LISTAR_DEMANDAS_VIA_ORGANIZACAO_GET(idOrganizacao, token);
             const { response, json } = await request(url, options);
             if (response.ok) {
@@ -269,14 +269,14 @@ const OverviewRequester = () => {
                         ]
                     }
                 ]}
-                editStyle={{ maxHeight: '700px', minWidth: '1000px' }}
+                editStyle={{ maxHeight: '700px' }}
                 modal />
         </Modal>
         <Modal SetModal={() => setSelectedProject(null)} View={!!selectedProject}>
              <ListInformations
                  Title={selectedProject && selectedProject.nome}
                  Informations={createProjectInformations(selectedProject)}
-                 editStyle={{ maxHeight: '700px', minWidth: '1000px' }}
+                 editStyle={{ maxHeight: '700px' }}
                  modal />
          </Modal>
     </ContainerMainContent>

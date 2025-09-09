@@ -12,7 +12,7 @@ import useForm from '../../Hooks/useForm';
 import Select from '../../Components/Forms/Select';
 import { UserContext } from '../../Components/UserContext';
 import useFetch from '../../Hooks/useFetch';
-import { TODOS_PROJETOS_GET, CANCELAR_ENTREGA_PATCH, EDITAR_ENTREGA_PATCH, ENTREGAR_ENTREGA_PUT, CONCLUIR_ENTREGA_PATCH, ACEITAR_ENTREGA_PATCH, ENTREGAS_PROJETO_GET } from '../../api/projeto';
+import { TODOS_PROJETOS_GET, CANCELAR_ENTREGA_PATCH, ENTREGAR_ENTREGA_PUT, CONCLUIR_ENTREGA_PATCH, ACEITAR_ENTREGA_PATCH, ENTREGAS_PROJETO_GET } from '../../api/projeto';
 import ContainerCards from '../../Components/ContainerCards.jsx';
 import TextoAviso from '../../Components/TextoAviso.jsx';
 

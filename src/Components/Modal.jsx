@@ -17,6 +17,10 @@ const StyledModal = styled.div`
     align-items: center;
     overflow-y: auto;
     padding: 0px 20px;
+
+    @media (max-width: 600px) {
+        padding: 0px 10px;
+    }
 `
 
 const ContainerCancelPropagClick = styled.div`
@@ -38,8 +42,8 @@ const ContainerButtons = styled.div`
     z-index: 2;
     position: relative;
 
-    @media (max-width: 1000px) {
-        width: calc(100vw - 80px);
+    @media (max-width: 1040px) {
+        width: calc(100vw - 60px);
         margin: 0 20px;
     }
 `
