@@ -5,4 +5,14 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   //base: process.env.VITE_BASE_PATH || '/marketplace-ifba-frontend',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://marketplace-ifba.duckdns.org',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })

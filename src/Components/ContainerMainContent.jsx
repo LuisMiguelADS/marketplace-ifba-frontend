@@ -12,8 +12,41 @@ const Container = styled.div`
     overflow-x: hidden;
 
     @media (max-width: 1000px) {
-        grid-column: 1;
+        grid-column: 1 / -1;
         padding: 20px;
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            display: none;
+        }
+        
+        /* Para Firefox */
+        scrollbar-width: none;
+        
+        /* Para IE e Edge */
+        -ms-overflow-style: none;
+    }
+
+    @media (max-width: 480px) {
+        grid-column: 1 / -1;
+        padding: 10px;
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            display: none;
+        }
+        
+        /* Para Firefox */
+        scrollbar-width: none;
+        
+        /* Para IE e Edge */
+        -ms-overflow-style: none;
     }
 
     &::-webkit-scrollbar {

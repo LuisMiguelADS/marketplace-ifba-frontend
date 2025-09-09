@@ -13,7 +13,6 @@ const StyledButton = styled.button`
     padding: 0.8rem 1.2rem;
     box-sizing: border-box;
     transition: 0.1s;
-    margin: 0 auto;
     display: block;
 
     &:hover, &:focus {

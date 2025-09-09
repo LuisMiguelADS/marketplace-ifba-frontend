@@ -10,6 +10,10 @@ const Form = styled.form`
     gap: 20px;
     width: fit-content;
     box-shadow: 0px 2px 8px #0000004b;
+
+    @media (max-width: 410px) {
+        width: 100%;
+    }
 `
 
 const ContainerHeader = styled.div`
@@ -25,6 +29,23 @@ const ContainerFields = styled.div`
     flex-wrap: wrap;
     gap: 30px;
 `
+const ResponsiveButton = styled(Button)`
+    @media (max-width: 410px) {
+        padding: 0px !important;
+        font-size: 30px !important;
+        font-weight: bold !important;
+        min-width: 100px;
+
+        span {
+            display: none;
+        }
+        
+        &::after {
+            content: '×';
+        }
+    }
+`;
+
 const FormFilter = ({ Title, children, onClearFilters }) => {
     function handleClearFilters(event) {
         event.preventDefault();
@@ -37,12 +58,12 @@ const FormFilter = ({ Title, children, onClearFilters }) => {
         <ContainerHeader>
             <h2>{Title}</h2>
             {onClearFilters && (
-                <Button 
-                    editStyle={{ backgroundColor: '#dc3545', borderColor: '#dc3545' }} 
+                <ResponsiveButton 
+                    editStyle={{ backgroundColor: '#dc3545', borderColor: '#dc3545' }}
                     onClick={handleClearFilters}
                 >
-                    Limpar Filtros
-                </Button>
+                    <span>Limpar Filtros</span>
+                </ResponsiveButton>
             )}
         </ContainerHeader>
         <ContainerFields>

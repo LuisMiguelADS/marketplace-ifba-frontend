@@ -11,7 +11,7 @@ import useFetch from '../Hooks/useFetch';
 
 const Form = styled.form`
     min-width: 340px;
-    max-width: 1000px;
+    width: 1000px;
     background-color: #E3F4E3;
     padding: 20px;
     border-radius: var(--standard-border);
@@ -26,16 +26,23 @@ const Form = styled.form`
         overflow-y: auto;
         overflow-x: hidden;
 
-        &::-webkit-scrollbar {
-            width: 20px;
-            background-color: #01420c;
+        @media (min-width: 1041px) {
+            &::-webkit-scrollbar {
+                width: 20px;
+                background-color: #01420c;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                height: 60px;
+                background-color: #018e1b;
+                border-radius: 5px;
+                border: 2px solid #00420C;
+            }
         }
 
-        &::-webkit-scrollbar-thumb {
-            height: 60px;
-            background-color: #018e1b;
-            border-radius: 5px;
-            border: 2px solid #00420C;
+        @media (max-width: 1040px) {
+            overflow-y: visible;
+            max-width: calc(100vw - 60px);
         }
     `}
 `

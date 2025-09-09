@@ -11,8 +11,6 @@ import Button from '../../Components/Forms/Button';
 import Modal from '../../Components/Modal';
 import FormRegisterGroupResearch from '../../Components/FormRegisterGroupResearch';
 import ListInformations from '../../Components/ListInformations';
-import ContainerCards from '../../Components/ContainerCards';
-import TextoAviso from '../../Components/TextoAviso';
 
 const AlertContainer = styled.div`
     background-color: #fff3cd;

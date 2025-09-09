@@ -11,6 +11,7 @@ import ListInformations from '../../Components/ListInformations';
 import { UserContext } from '../../Components/UserContext';
 import Modal from '../../Components/Modal';
 import FormRegisterOrganization from '../../Components/FormRegisterOrganization';
+import TextoAviso from '../../Components/TextoAviso';
 
 const ContainerRequest = styled.div`
     background-color: #E3F4E3;
@@ -19,6 +20,15 @@ const ContainerRequest = styled.div`
     flex-direction: column;
     gap: 10px;
     border-radius: var(--standard-border);
+`
+
+const StyledForm = styled.form`
+    display: flex;
+    gap: 10px;
+    
+    @media (max-width: 680px) {
+        flex-wrap: wrap;
+    }
 `
 
 const JoinOrganization = () => {
@@ -167,27 +177,14 @@ const JoinOrganization = () => {
                         );
                     })
                 ) : (
-                    <ContainerRequest style={{
-                        backgroundColor: '#f0f0f0',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        height: '150px',
-                        color: '#646363',
-                        fontSize: '1.2em',
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                        width: '1000px'
-                    }}>
-                        <p>Sem Solicitações</p>
-                    </ContainerRequest>
+                    <TextoAviso>Não há solicitações de entrada</TextoAviso>
                 )} </>
             )}
 
         </>) : (<>
             <h1>Conectar à Organização</h1>
             <h3>Procure a sua organização pelo CNPJ</h3>
-            <form style={{ display: 'flex', gap: '20px' }}>
+            <StyledForm>
                 <Input
                     label="CNPJ"
                     type="text"
@@ -195,9 +192,10 @@ const JoinOrganization = () => {
                     {...cnpj}
                     placeholder="Digite o CNPJ"
                     definitionMaxWidth="400px"
+                    editStyle={{}}
                 />
-                <Button onClick={handleClickButtonSearch}>Buscar</Button>
-            </form>
+                <Button onClick={handleClickButtonSearch} editStyle={{ alignSelf: 'flex-end', margin: '0' }}>Buscar</Button>
+            </StyledForm>
             {data && <>
                 <h1>Resultado</h1>
                 <ListInformations
@@ -226,13 +224,13 @@ const JoinOrganization = () => {
                     ]}
                 />
                 <Button editStyle={{ alignSelf: 'flex-start' }} onClick={handleClickButtonRequest}>Solicitar Conexão</Button>
-            </>}
-            <h2 style={{ borderTop: '1px solid black', paddingTop: '20px' }}>Sua organização ainda não está cadastrada?</h2>
-            <Button editStyle={{ alignSelf: 'flex-start' }} onClick={handleClickButtonModal}>Solicitar Cadastro</Button>
-            <Modal SetModal={setModal} View={modal}>
-                <FormRegisterOrganization editStyle={{ overflowY: 'scroll', width: '1000px', maxHeight: '700px' }} modal />
-            </Modal>
-        </>)
+                </>}
+                <h2 style={{ borderTop: '1px solid black', paddingTop: '20px' }}>Sua organização ainda não está cadastrada?</h2>
+                <Button editStyle={{ alignSelf: 'flex-start' }} onClick={handleClickButtonModal}>Solicitar Cadastro</Button>
+                <Modal SetModal={setModal} View={modal}>
+                    <FormRegisterOrganization editStyle={{ overflowY: 'scroll', maxHeight: '700px' }} modal />
+                </Modal>
+            </>)
         }
     </ContainerMainContent>
 }

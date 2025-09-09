@@ -10,7 +10,7 @@ import FormFilter from '../../Components/FormFilter';
 import Modal from '../../Components/Modal';
 import { UserContext } from '../../Components/UserContext';
 import useFetch from '../../Hooks/useFetch';
-import { LISTAR_DEMANDAS_APROVADAS_GET, LISTAR_DEMANDAS_RECEBIDAS_GRUPO_PESQUISA_GET, VISUALIZAR_DEMANDA_POST } from '../../api/demanda';
+import { LISTAR_DEMANDAS_APROVADAS_GET, VISUALIZAR_DEMANDA_POST } from '../../api/demanda';
 import { REMOVER_DEMANDA_GRUPO_PESQUISA_POST } from '../../api/grupoPesquisa';
 import { REGISTER_PROJETO_POST } from '../../api/projeto';
 import NewOfferForm from '../../Components/NewOfferForm';
