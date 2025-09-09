@@ -4,23 +4,9 @@ import useFetch from '../Hooks/useFetch';
 import Input from './Forms/Input';
 import styled from 'styled-components';
 import Button from './Forms/Button';
-import ButtonClosedModel from './ButtonClosedModel';
 import { UserContext } from './UserContext';
 import { CRIAR_ENTREGA_POST, EDITAR_ENTREGA_PATCH } from '../api/projeto';
-
-const Form = styled.form`
-    min-width: 340px;
-    max-width: 1000px;
-    background-color: #00ff2f29;
-    padding: 20px;
-    border-radius: var(--standard-border);
-    box-shadow: 0 0 5px 1px #018d1b40;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
-    margin-top: 20px;
-`
+import DefaultForm from './DefaultForm';
 
 const SubTitleForm = styled.h2`
     font-size: 1.5rem;
@@ -170,7 +156,12 @@ const NewDeliveryForm = ({ editStyle, idProjeto, onSuccess, onClose, entregaData
 
     return <Container>
         <h1>{isEditing ? 'Editar Entrega' : 'Nova Entrega'}</h1>
-        <Form onSubmit={isEditing ? handleEditSubmit : handleSubmit} style={editStyle}>
+        <DefaultForm 
+            onSubmit={isEditing ? handleEditSubmit : handleSubmit} 
+            editStyle={editStyle}
+            backgroundColor="#00ff2f29"
+            marginTop="20px"
+        >
             <SubTitleForm>Informações Básicas</SubTitleForm>
             <Input 
                 label="Título" 
@@ -198,7 +189,7 @@ const NewDeliveryForm = ({ editStyle, idProjeto, onSuccess, onClose, entregaData
             <Button type="submit" disabled={loading}>
                 {loading ? (isEditing ? 'Salvando...' : 'Criando...') : (isEditing ? 'Salvar Alterações' : 'Criar Entrega')}
             </Button>
-        </Form>
+        </DefaultForm>
     </Container>
 }
 

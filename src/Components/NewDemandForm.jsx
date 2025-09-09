@@ -4,51 +4,9 @@ import Input from './Forms/Input';
 import styled from 'styled-components';
 import Button from './Forms/Button';
 import { REGISTER_DEMAND_POST } from '../api/demanda';
-import ButtonClosedModel from './ButtonClosedModel';
 import { UserContext } from './UserContext';
 import useFetch from '../Hooks/useFetch';
-
-const Form = styled.form`
-    min-width: 340px;
-    max-width: 1000px;
-    background-color: #D6FFDE;
-    padding: 20px;
-    border-radius: var(--standard-border);
-    box-shadow: 0 0 5px 1px #018d1b40;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
-
-    ${props => props.modal && `
-        height: fit-content;
-        overflow-y: auto;
-        overflow-x: hidden;
-
-        @media (min-width: 1041px) {
-            &::-webkit-scrollbar {
-                width: 20px;
-                background-color: #01420c;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                height: 60px;
-                background-color: #018e1b;
-                border-radius: 5px;
-                border: 2px solid #00420C;
-            }
-        }
-
-        @media (max-width: 1040px) {
-            overflow-y: visible;
-            max-width: calc(100vw - 60px);
-        }
-
-        @media (max-width: 600px) {
-            padding: 20px 10px;
-        }
-    `}
-`
+import DefaultForm from './DefaultForm';
 
 const SubTitleForm = styled.h2`
     font-size: 1.5rem;
@@ -109,20 +67,27 @@ const NewDemandForm = ({ editStyle, ButtonClosedModal, onClick, onDemandCreated,
         }
     }
 
-    return <Form action="" style={editStyle} modal={props.modal}>
-        {ButtonClosedModal === "yes" && (<ButtonClosedModel onClick={onClick} className="pi pi-times" />)}
-        <SubTitleForm>Informações Básicas</SubTitleForm>
-        <Input label="Título" type="text" name="titleDemand" {...titleDemand} placeholder="Ex. Automatizar Processo" />
-        <Input label="E-mail do responsável" type="text" name="email" {...emailResponsible} placeholder="Ex. responsavel@gmail.com" />
-        <Input label="Orçamento disponível" type="number" name="budget" {...budget} placeholder="Ex. 4.000,00" step="0.01" />
-        <SubTitleForm>Cronograma</SubTitleForm>
-        <Input label="Prazo desejado" type="date" name="term" {...term} />
-        <SubTitleForm>Detalhes</SubTitleForm>
-        <Input label="Descrição" type="textarea" name="description" {...description} placeholder="Escreva..." />
-        <Input label="Resumo" type="textarea" name="summary" {...summary} placeholder="Escreva..." />
-        <Input label="Critérios" type="textarea" name="criteria" {...criteria} placeholder="Escreva..." />
-        <Button onClick={handleSubmit}>Criar Demanda</Button>
-    </Form>
+    return (
+        <DefaultForm 
+            editStyle={editStyle} 
+            ButtonClosedModal={ButtonClosedModal} 
+            onClick={onClick} 
+            modal={props.modal}
+            backgroundColor="#D6FFDE"
+        >
+            <SubTitleForm>Informações Básicas</SubTitleForm>
+            <Input label="Título" type="text" name="titleDemand" {...titleDemand} placeholder="Ex. Automatizar Processo" />
+            <Input label="E-mail do responsável" type="text" name="email" {...emailResponsible} placeholder="Ex. responsavel@gmail.com" />
+            <Input label="Orçamento disponível" type="number" name="budget" {...budget} placeholder="Ex. 4.000,00" step="0.01" />
+            <SubTitleForm>Cronograma</SubTitleForm>
+            <Input label="Prazo desejado" type="date" name="term" {...term} />
+            <SubTitleForm>Detalhes</SubTitleForm>
+            <Input label="Descrição" type="textarea" name="description" {...description} placeholder="Escreva..." />
+            <Input label="Resumo" type="textarea" name="summary" {...summary} placeholder="Escreva..." />
+            <Input label="Critérios" type="textarea" name="criteria" {...criteria} placeholder="Escreva..." />
+            <Button onClick={handleSubmit}>Criar Demanda</Button>
+        </DefaultForm>
+    );
 }
 
 export default NewDemandForm;

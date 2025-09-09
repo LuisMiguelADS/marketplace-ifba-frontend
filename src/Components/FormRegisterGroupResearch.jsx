@@ -1,44 +1,11 @@
 import React from 'react';
 import useForm from '../Hooks/useForm';
 import Input from './Forms/Input';
-import styled from 'styled-components';
-import ButtonClosedModel from './ButtonClosedModel';
 import Button from './Forms/Button';
 import { REGISTER_GROUP_REQUESTER_POST } from '../api/grupoPesquisa';
 import { UserContext } from './UserContext';
 import useFetch from '../Hooks/useFetch';
-
-
-const Form = styled.form`
-    min-width: 340px;
-    max-width: 1000px;
-    background-color: #E3F4E3;
-    padding: 20px;
-    border-radius: var(--standard-border);
-    box-shadow: 0 0 5px 1px #018d1b40;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
-
-    ${props => props.modal && `
-        height: fit-content;
-        overflow-y: auto;
-        overflow-x: hidden;
-
-        &::-webkit-scrollbar {
-            width: 20px;
-            background-color: #01420c;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            height: 60px;
-            background-color: #018e1b;
-            border-radius: 5px;
-            border: 2px solid #00420C;
-        }
-    `}
-`
+import DefaultForm from './DefaultForm';
 
 const FormRegisterGroupResearch = ({ editStyle, ButtonClosedModal, onClick, ...props }) => {
     const nome = useForm();
@@ -81,13 +48,19 @@ const FormRegisterGroupResearch = ({ editStyle, ButtonClosedModal, onClick, ...p
         }
     }
 
-    return <Form action="" style={editStyle} modal={props.modal}>
-        {ButtonClosedModal === "yes" && (<ButtonClosedModel onClick={onClick} className="pi pi-times" />)}
-        <h1>Cadastrar Grupo de Pesquisa</h1>
-        <Input label="Nome" type="text" name="nome" {...nome} placeholder="Nome do grupo de pesquisa" />
-        <Input label="Descrição" type="textarea" name="descricao" {...descricao} placeholder="Descreva o grupo de pesquisa" />
-        <Button onClick={handleSubmit}>Cadastrar</Button>
-    </Form>
+    return (
+        <DefaultForm 
+            editStyle={editStyle} 
+            ButtonClosedModal={ButtonClosedModal} 
+            onClick={onClick} 
+            modal={props.modal}
+        >
+            <h1>Cadastrar Grupo de Pesquisa</h1>
+            <Input label="Nome" type="text" name="nome" {...nome} placeholder="Nome do grupo de pesquisa" />
+            <Input label="Descrição" type="textarea" name="descricao" {...descricao} placeholder="Descreva o grupo de pesquisa" />
+            <Button onClick={handleSubmit}>Cadastrar</Button>
+        </DefaultForm>
+    );
 }
 
 export default FormRegisterGroupResearch

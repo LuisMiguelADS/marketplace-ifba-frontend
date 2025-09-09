@@ -39,6 +39,7 @@ const Container = styled.div`
             overflow-y: visible;
             max-width: calc(100vw - 40px);
             min-width: 340px;
+            padding: 15px;
         }
 
         @media (max-width: 600px) {
@@ -58,7 +59,7 @@ const ListInformations = (props) => {
             ))
         }
         {(props.ButtonRecused || props.ButtonEdit || props.ButtonSucess) && (
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 {
                     props.ButtonRecused && (
                         <Button Recused>{props.ButtonRecused}</Button>

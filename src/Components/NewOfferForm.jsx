@@ -6,20 +6,7 @@ import styled from 'styled-components';
 import Button from './Forms/Button';
 import { UserContext } from './UserContext';
 import { REGISTER_OFERTA_SOLUCAO_POST } from '../api/ofertaSolucao';
-
-const Form = styled.form`
-    min-width: 340px;
-    max-width: 1000px;
-    background-color: #00ff2f29;
-    padding: 20px;
-    border-radius: var(--standard-border);
-    box-shadow: 0 0 5px 1px #018d1b40;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    position: relative;
-    margin-top: 20px;
-`
+import DefaultForm from './DefaultForm';
 
 const SubTitleForm = styled.h2`
     font-size: 1.5rem;
@@ -91,7 +78,12 @@ const NewOfferForm = ({ editStyle, demandaId, onSuccess }) => {
 
     return <Container>
         <h1>Enviar Oferta de Solução</h1>
-        <Form onSubmit={handleSubmit} style={editStyle}>
+        <DefaultForm 
+            onSubmit={handleSubmit} 
+            editStyle={editStyle}
+            backgroundColor="#00ff2f29"
+            marginTop="20px"
+        >
             <SubTitleForm>Informações da Solução</SubTitleForm>
             <Input 
                 label="Nome da Solução" 
@@ -175,7 +167,7 @@ const NewOfferForm = ({ editStyle, demandaId, onSuccess }) => {
             <Button type="submit" disabled={loading}>
                 {loading ? 'Enviando...' : 'Enviar Oferta'}
             </Button>
-        </Form>
+        </DefaultForm>
     </Container>
 }
 

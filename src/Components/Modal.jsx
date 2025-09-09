@@ -16,11 +16,7 @@ const StyledModal = styled.div`
     justify-content: center;
     align-items: center;
     overflow-y: auto;
-    padding: 0px 20px;
-
-    @media (max-width: 600px) {
-        padding: 100px 10px 20px;
-    }
+    margin: 0 auto;
 `
 
 const ContainerCancelPropagClick = styled.div`
@@ -43,21 +39,22 @@ const ContainerButtons = styled.div`
     position: relative;
 
     @media (max-width: 1040px) {
-        width: calc(100vw - 60px);
-        margin: 0 20px;
+        width: calc(100vw - 40px);
+        gap: 20px;
     }
 
     @media (max-width: 768px) {
-        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: 500px) {
+        flex-wrap: wrap;
+        gap: 5px;
     }
 `
 
 const DivEffect = styled.div`
     animation: left 1s ease;
-
-    @media (max-width: 1040px) {
-        min-width: calc(100vw - 100px);
-    }
 
     @keyframes left {
       0% {
@@ -83,7 +80,7 @@ const Modal = (props) => {
     };
 
     return <StyledModal onClick={handleOverlayClick}>
-        <ContainerButtons style={{ justifyContent: 'flex-end', marginRight: '-30px' }}>
+        <ContainerButtons style={{ justifyContent: 'flex-end', marginRight: '-20px' }}>
             <ButtonClosedModel onClick={handleOverlayClick} className="pi pi-times" />
         </ContainerButtons>
         <ContainerCancelPropagClick onClick={handleContentClick}>
