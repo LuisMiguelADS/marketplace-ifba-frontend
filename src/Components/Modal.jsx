@@ -46,6 +46,10 @@ const ContainerButtons = styled.div`
         width: calc(100vw - 60px);
         margin: 0 20px;
     }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 `
 
 const DivEffect = styled.div`

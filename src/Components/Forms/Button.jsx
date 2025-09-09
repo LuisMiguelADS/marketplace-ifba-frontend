@@ -25,6 +25,10 @@ const StyledButton = styled.button`
       opacity: 0.5;
       cursor: wait;
     }
+
+    @media (max-width: 768px) {
+      min-width: 150px;
+    }
 `
 
 const StyledButtonRecused = styled(StyledButton)`
