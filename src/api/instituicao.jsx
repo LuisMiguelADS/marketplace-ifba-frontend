@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:8080';
+export const API_URL = 'http://3.87.102.125:8080';
 
 // Funções para instituições - estrutura base para futuras implementações
 export function INSTITUICAO_ID_GET(id, token) {
