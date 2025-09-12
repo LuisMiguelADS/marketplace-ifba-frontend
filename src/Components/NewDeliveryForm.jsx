@@ -17,6 +17,11 @@ const Container = styled.div`
     background-color: #D6FFDE;
     padding: 30px;
     border-radius: var(--standard-border);
+
+    @media (max-width: 1000px) {
+        width: calc(100vw - 40px);
+        padding: 20px 10px;
+    }
 `
 
 const NewDeliveryForm = ({ editStyle, idProjeto, onSuccess, onClose, entregaData = null, isEditing = false }) => {

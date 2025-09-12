@@ -15,13 +15,23 @@ const Container = styled.div`
     box-shadow: 0px 2px 8px #0000004b;
     height: fit-content;
 
+    @media (max-width: 1000px) {
+        width: calc(100vw - 40px);
+        padding: 20px 10px 10px 10px;
+    }
+
+    @media (max-width: 600px) {
+        width: calc(100vw - 20px);
+        padding: 10px 5px 5px 5px;
+    }
+
     ${props => props.editStyle}
 
     ${props => props.modal && `
         overflow-y: auto;
         overflow-x: hidden;
 
-        @media (min-width: 1001px) {
+        @media (min-width: 1000px) {
             &::-webkit-scrollbar {
                 width: 20px;
                 background-color: #01420c;

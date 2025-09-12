@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import ButtonClosedModel from './ButtonClosedModel';
 
 const StyledForm = styled.form`
-    min-width: 340px;
-    width: ${props => props.width || '1000px'};
+    width: 100%;
     max-width: ${props => props.maxWidth || '1000px'};
     background-color: ${props => props.backgroundColor || '#E3F4E3'};
     padding: 20px;
@@ -15,6 +14,10 @@ const StyledForm = styled.form`
     gap: 20px;
     position: relative;
     margin-top: ${props => props.marginTop || '0px'};
+
+    @media (max-width: 600px) {
+        padding: 20px 10px;
+    }
 
     ${props => props.modal && `
         height: fit-content;

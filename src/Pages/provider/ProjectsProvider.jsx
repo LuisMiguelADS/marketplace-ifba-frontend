@@ -4,7 +4,6 @@ import ContainerMainContent from '../../Components/ContainerMainContent';
 import Card from '../../Components/Card';
 import ListInformations from '../../Components/ListInformations';
 import Button from '../../Components/Forms/Button';
-import Delivery from '../../Components/Delivery';
 import Modal from '../../Components/Modal';
 import NewDeliveryForm from '../../Components/NewDeliveryForm';
 import FormFilter from '../../Components/FormFilter';
@@ -12,7 +11,7 @@ import useForm from '../../Hooks/useForm';
 import Select from '../../Components/Forms/Select';
 import { UserContext } from '../../Components/UserContext';
 import useFetch from '../../Hooks/useFetch';
-import { TODOS_PROJETOS_GET, CANCELAR_ENTREGA_PATCH, EDITAR_ENTREGA_PATCH, ENTREGAR_ENTREGA_PUT, CONCLUIR_ENTREGA_PATCH, APROVAR_ENTREGA_POST, ENTREGAS_PROJETO_GET } from '../../api/projeto';
+import { TODOS_PROJETOS_GET, CANCELAR_ENTREGA_PATCH, ENTREGAR_ENTREGA_PUT, CONCLUIR_ENTREGA_PATCH, APROVAR_ENTREGA_POST, ENTREGAS_PROJETO_GET } from '../../api/projeto';
 import ContainerCards from '../../Components/ContainerCards';
 import TextoAviso from '../../Components/TextoAviso';
 
@@ -459,7 +458,7 @@ const ProjectsProvider = () => {
                 </>
             )}
             <Modal SetModal={setModal} View={modal} {...getButtonsConfig()}>
-                <Delivery
+                <ListInformations
                     Title={selectedEntrega?.titulo || 'Entrega'}
                     Informations={[
                         {
@@ -493,7 +492,7 @@ const ProjectsProvider = () => {
                         }
                     ]}
                 >
-                </Delivery>
+                </ListInformations>
             </Modal>
             <Modal SetModal={setModalNewDelivery} View={modalNewDelivery}>
                 <NewDeliveryForm 

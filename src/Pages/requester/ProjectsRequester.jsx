@@ -4,7 +4,6 @@ import ContainerMainContent from '../../Components/ContainerMainContent';
 import Card from '../../Components/Card';
 import ListInformations from '../../Components/ListInformations';
 import Button from '../../Components/Forms/Button';
-import Delivery from '../../Components/Delivery';
 import Modal from '../../Components/Modal';
 import NewDeliveryForm from '../../Components/NewDeliveryForm';
 import FormFilter from '../../Components/FormFilter';
@@ -457,8 +456,8 @@ const ProjectsRequester = () => {
                 </>
             )}
             <Modal SetModal={setModal} View={modal} {...getButtonsConfig()}>
-                <Delivery
-                    Title={selectedEntrega?.titulo || 'Entrega'}
+                <ListInformations
+                    Title={selectedEntrega && selectedEntrega.titulo}
                     Informations={[
                         {
                             title: 'Sobre a Entrega',
@@ -491,7 +490,7 @@ const ProjectsRequester = () => {
                         }
                     ]}
                 >
-                </Delivery>
+                </ListInformations>
             </Modal>
             <Modal SetModal={setModalNewDelivery} View={modalNewDelivery}>
                 <NewDeliveryForm 
