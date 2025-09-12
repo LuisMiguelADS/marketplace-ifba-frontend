@@ -5,8 +5,8 @@ import ButtonClosedModel from './ButtonClosedModel';
 
 const StyledModal = styled.div`
     height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.665);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.62);
     position: absolute;
     top: 0;
     left: 0;
@@ -25,9 +25,13 @@ const ContainerCancelPropagClick = styled.div`
     padding: 20px;
     z-index: 1;
     margin-top: -55px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
-const ContainerButtons = styled.div`
+const ContainerButtonCancel = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -39,7 +43,7 @@ const ContainerButtons = styled.div`
     position: relative;
 
     @media (max-width: 1040px) {
-        width: calc(100vw - 40px);
+        width: calc(100vw - 80px);
         gap: 20px;
     }
 
@@ -48,13 +52,42 @@ const ContainerButtons = styled.div`
     }
 
     @media (max-width: 500px) {
+        gap: 10px;
+    }
+`
+
+const ContainerButtons = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 1000px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+
+    @media (max-width: 1040px) {
+        width: calc(100vw - 80px);
+        gap: 20px;
+    }
+
+    @media (max-width: 768px) {
         flex-wrap: wrap;
-        gap: 5px;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 500px) {
+        gap: 10px;
     }
 `
 
 const DivEffect = styled.div`
     animation: left 1s ease;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 
     @keyframes left {
       0% {
@@ -67,6 +100,7 @@ const DivEffect = styled.div`
 `
 
 const Modal = (props) => {
+    let isButton = props.ButtonEdit || props.ButtonRecused || props.ButtonConfirm || props.ButtonCreate || props.ButtonCanceled || props.ButtonOffer || props.ButtonApprove || props.ButtonDeliver;
     if (!props.View) {
         return null;
     }
@@ -80,9 +114,9 @@ const Modal = (props) => {
     };
 
     return <StyledModal onClick={handleOverlayClick}>
-        <ContainerButtons style={{ justifyContent: 'flex-end', marginRight: '-20px' }}>
+        <ContainerButtonCancel style={{ justifyContent: 'flex-end', marginRight: '-20px' }}>
             <ButtonClosedModel onClick={handleOverlayClick} className="pi pi-times" />
-        </ContainerButtons>
+        </ContainerButtonCancel>
         <ContainerCancelPropagClick onClick={handleContentClick}>
             <DivEffect >{props.children}</DivEffect>
         </ContainerCancelPropagClick>

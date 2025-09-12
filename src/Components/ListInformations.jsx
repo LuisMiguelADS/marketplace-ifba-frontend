@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Information from './Information';
-import Button from './Forms/Button';
 
 const Container = styled.div`
     width: 1000px;
@@ -15,14 +14,13 @@ const Container = styled.div`
     box-shadow: 0px 2px 8px #0000004b;
     height: fit-content;
 
-    @media (max-width: 1000px) {
-        width: calc(100vw - 40px);
-        padding: 20px 10px 10px 10px;
+    @media (max-width: 1380px) {
+        max-width: 100%;
+        padding: 20px 20px;
     }
 
     @media (max-width: 600px) {
-        width: calc(100vw - 20px);
-        padding: 10px 5px 5px 5px;
+        padding: 10px 10px;
     }
 
     ${props => props.editStyle}
@@ -48,12 +46,19 @@ const Container = styled.div`
         @media (max-width: 1040px) {
             overflow-y: visible;
             max-width: calc(100vw - 40px);
-            min-width: 340px;
             padding: 15px;
         }
 
+        @media (max-height: 768px) {
+            height: 80vh;
+        }
+
+        @media  (max-width: 420px) {
+            height: 60vh;
+        }
+
         @media (max-width: 600px) {
-            max-width: calc(100vw - 20px);
+            max-width: 100%;
             padding: 20px 10px;
         }
     `}
@@ -68,27 +73,6 @@ const ListInformations = (props) => {
                 <Information key={index} Title={info.title} Informations={info.infos} Tags={info.tags} WithBackground={(index === 0) ? 'true' : 'false'} />
             ))
         }
-        {(props.ButtonRecused || props.ButtonEdit || props.ButtonSucess) && (
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                {
-                    props.ButtonRecused && (
-                        <Button Recused>{props.ButtonRecused}</Button>
-                    )
-                }
-
-                {
-                    props.ButtonEdit && (
-                        <Button Edited>{props.ButtonEdit}</Button>
-                    )
-                }
-
-                {
-                    props.ButtonSucess && (
-                        <Button>{props.ButtonSucess}</Button>
-                    )
-                }
-            </div>
-        )}
     </Container >
 }
 
