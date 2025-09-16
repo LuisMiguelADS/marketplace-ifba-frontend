@@ -109,7 +109,7 @@ const NavigationRequester = ({ isMenuOpen, setIsMenuOpen }) => {
             <ButtonNavigation Icon='pi pi-building' Caminho="/requester/organization">Organização</ButtonNavigation>
         </div>
                 <div onClick={handleMenuItemClick}>
-                    <ButtonNavigation Icon='pi pi-user'>Perfil</ButtonNavigation>
+                     <ButtonNavigation Icon='pi pi-user'Caminho="/requester/profile">Perfil</ButtonNavigation>
                 </div>
             </NavigationLeft>
         </>

@@ -105,9 +105,11 @@ const NavigationProvider = ({ isMenuOpen, setIsMenuOpen }) => {
                 <div onClick={handleMenuItemClick}>
                     <ButtonNavigation Icon='pi pi-comments' Caminho="/provider/conversations">Conversas</ButtonNavigation>
                 </div>
+
                 <div onClick={handleMenuItemClick}>
-                    <ButtonNavigation Icon='pi pi-user'>Perfil</ButtonNavigation>
+                    <ButtonNavigation Icon='pi pi-user'Caminho="/provider/profile">Perfil</ButtonNavigation>
                 </div>
+
             </NavigationLeft>
         </>
     );

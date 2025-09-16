@@ -15,6 +15,8 @@ import ProjectsRequester from './Pages/requester/ProjectsRequester';
 import GroupResearchRequester from './Pages/requester/GroupResearchRequester';
 import ConversationsRequester from './Pages/requester/ConversationsRequester';
 import JoinOrganization from './Pages/requester/JoinOrganization';
+import ProfileRequester from './Pages/requester/ProfileRequester';
+
 
 // Demandados
 import NavigationProvider from './Components/Navigation/NavigationProvider';
@@ -23,6 +25,7 @@ import OfferSolutionProvider from './Pages/provider/OfferSolutionProvider';
 import DemandsProvider from './Pages/provider/DemandsProvider';
 import ProjectsProvider from './Pages/provider/ProjectsProvider';
 import ConversationsProvider from './Pages/provider/ConversationsProvider';
+import ProfileProvider from './Pages/provider/ProfileProvider';
 
 import NotFound from './Pages/NotFound';
 import { UserStorage } from './Components/UserContext';
@@ -62,6 +65,7 @@ function App() {
               <Route path="research-group" element={<GroupResearchRequester />} />
               <Route path="conversations" element={<ConversationsRequester />} />
               <Route path="organization" element={<JoinOrganization />} />
+              <Route path="profile" element={<ProfileRequester />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>
@@ -82,6 +86,7 @@ function App() {
               <Route path="projects" element={<ProjectsProvider />} />
               <Route path="research-group" element={<JoinGroupResearch />} />
               <Route path="conversations" element={<ConversationsProvider />} />
+              <Route path="profile" element={<ProfileProvider />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Route>
